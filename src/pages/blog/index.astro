@@ -2,7 +2,14 @@
 import Base from "@layouts/Base.astro";
 import SectionHeading from "@components/SectionHeading.astro";
 import { getBlogs } from "@lib/microcms.ts";
-const allBlogs = await getBlogs();
+
+let allBlogs = [];
+try {
+  allBlogs = await getBlogs();
+} catch (err) {
+  console.warn('blogs fetch failed:', err);
+}
+
 const blogs = allBlogs.filter(post =>
   post.category.some(cat => ["お知らせ", "活動実績", "ENTOEN活動報告"].includes(cat))
 );
