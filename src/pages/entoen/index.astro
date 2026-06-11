@@ -4,7 +4,12 @@ import SectionHeading from "@components/SectionHeading.astro";
 import { CTA } from "@config/site.ts";
 import { getCases } from "@lib/microcms.ts";
 
-const cases = await getCases();
+let cases = [];
+try {
+  cases = await getCases();
+} catch (err) {
+  console.warn('cases fetch failed:', err);
+}
 ---
 
 <Base

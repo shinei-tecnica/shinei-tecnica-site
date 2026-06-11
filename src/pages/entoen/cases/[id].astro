@@ -3,11 +3,16 @@ import Base from "@layouts/Base.astro";
 import { getCases } from "@lib/microcms.ts";
 
 export async function getStaticPaths() {
-  const cases = await getCases();
-  return cases.map((caseItem) => ({
-    params: { id: caseItem.id },
-    props: { caseItem },
-  }));
+  try {
+    const cases = await getCases();
+    return cases.map((caseItem) => ({
+      params: { id: caseItem.id },
+      props: { caseItem },
+    }));
+  } catch (err) {
+    console.warn('entoen cases fetch failed:', err);
+    return [];
+  }
 }
 
 interface Props {

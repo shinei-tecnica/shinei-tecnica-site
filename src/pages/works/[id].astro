@@ -4,12 +4,22 @@ import CtaBlock from "@components/CtaBlock.astro";
 import { getWorks, getWorkDetail } from "@lib/microcms.ts";
 
 export async function getStaticPaths() {
-  const works = await getWorks();
-  return works.map((w) => ({ params: { id: w.id } }));
+  try {
+    const works = await getWorks();
+    return works.map((w) => ({ params: { id: w.id } }));
+  } catch (err) {
+    console.warn('works fetch failed:', err);
+    return [];
+  }
 }
 
 const { id } = Astro.params;
-const work = await getWorkDetail(id!);
+let work;
+try {
+  work = await getWorkDetail(id!);
+} catch (err) {
+  console.warn('work detail fetch failed:', err);
+}
 if (!work) return Astro.redirect("/works/");
 ---
 <Base title={work.title} description={work.metaDescription}>
