@@ -1,0 +1,271 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+ *  グローバルスタイル / 最小デザインシステム
+ *  方針: ニュートラル＋低彩度・アクセント抑制・余白広め・装飾最小
+ *        2入口でトーン分け（金型=紺・技術的 / ENTOEN=青緑・温かみ）
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ---- デザイントークン（CSS変数） ---- */
+:root {
+  /* 配色：紺×白ベース、低彩度のインダストリアルトーン */
+  --c-bg: #ffffff;
+  --c-bg-alt: #f5f7f9; /* セクション区切りの薄いグレー */
+  --c-bg-deep: #11203a; /* フッター等の濃紺背景 */
+  --c-ink: #1d2733; /* 本文テキスト */
+  --c-ink-soft: #5b6573; /* 補足テキスト */
+  --c-line: #dde2e8; /* 罫線・カード境界 */
+
+  /* ブランド（金型＝主役） */
+  --c-navy: #16243d;
+  --c-navy-700: #1f3457;
+  --c-navy-300: #6b7d9c;
+
+  /* アクセント（ENTOEN＝循環） */
+  --c-entoen: #2f7d76;
+  --c-entoen-soft: #e8f1ef;
+
+  /* 状態色（控えめ） */
+  --c-warn-bg: #f7f4ee;
+  --c-warn-line: #e3dcc9;
+
+  /* タイポグラフィ */
+  --font-base: "Noto Sans JP", system-ui, -apple-system, "Hiragino Kaku Gothic ProN",
+    "Yu Gothic", Meiryo, sans-serif;
+  --fs-base: 16px;
+  --lh-base: 1.85;
+
+  /* レイアウト */
+  --container: 1120px;
+  --container-narrow: 760px;
+  --radius: 6px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 1px 2px rgba(17, 32, 58, 0.06);
+  --shadow-md: 0 6px 24px rgba(17, 32, 58, 0.08);
+
+  /* 余白スケール */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-12: 6rem;
+
+  --header-h: 72px;
+}
+
+/* ---- リセット（最小） ---- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--c-ink);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+}
+img,
+svg,
+picture {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
+}
+ul {
+  padding: 0;
+  list-style: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- アクセシビリティ ---- */
+:focus-visible {
+  outline: 3px solid var(--c-navy-300);
+  outline-offset: 2px;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  background: var(--c-navy);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  z-index: 200;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* ---- レイアウト部品 ---- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: clamp(20px, 5vw, 40px);
+}
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+.section {
+  padding-block: var(--space-12);
+}
+.section--alt {
+  background: var(--c-bg-alt);
+}
+.section--navy {
+  background: var(--c-bg-deep);
+  color: #fff;
+}
+@media (max-width: 640px) {
+  .section {
+    padding-block: var(--space-8);
+  }
+}
+
+/* ---- 見出し ---- */
+.section-head {
+  margin-bottom: var(--space-6);
+}
+.section-en {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--c-navy-300);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.section-title {
+  font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+}
+.section-lead {
+  margin-top: var(--space-2);
+  color: var(--c-ink-soft);
+  max-width: none;
+}
+
+/* ---- ボタン / CTA ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  min-height: 48px; /* タップ領域確保 */
+  padding: 0.75rem 1.6rem;
+  border-radius: var(--radius);
+  font-weight: 700;
+  font-size: 1rem;
+  border: 1.5px solid transparent;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.btn:hover {
+  text-decoration: none;
+}
+.btn--primary {
+  background: var(--c-navy);
+  color: #fff;
+}
+.btn--primary:hover {
+  background: var(--c-navy-700);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--c-navy);
+  border-color: var(--c-navy);
+}
+.btn--outline:hover {
+  background: var(--c-navy);
+  color: #fff;
+}
+.btn--entoen {
+  background: var(--c-entoen);
+  color: #fff;
+}
+.btn--entoen:hover {
+  filter: brightness(0.93);
+}
+.btn--ghost {
+  background: #fff;
+  color: var(--c-navy);
+  border-color: var(--c-line);
+}
+.btn--lg {
+  min-height: 56px;
+  font-size: 1.05rem;
+  padding: 0.9rem 2rem;
+}
+
+/* ---- カード ---- */
+.card {
+  background: #fff;
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---- ユーティリティ ---- */
+.text-soft {
+  color: var(--c-ink-soft);
+}
+.grid {
+  display: grid;
+  gap: var(--space-3);
+}
+@media (min-width: 700px) {
+  .grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid--3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 入口②（ENTOEN）配下のトーン切替：data-tone="entoen" を付けたラッパで使用 */
+[data-tone="entoen"] {
+  --c-navy: var(--c-entoen);
+  --c-navy-700: #276a64;
+  --c-navy-300: #6fa39d;
+}

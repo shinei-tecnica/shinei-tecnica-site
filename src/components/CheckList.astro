@@ -1,0 +1,59 @@
+---
+// 「こんな方に向いています」チェックリスト風UI
+interface Props {
+  heading: string;
+  items: string[];
+  accent?: "mold" | "entoen";
+}
+const { heading, items, accent = "mold" } = Astro.props;
+---
+<div class:list={["checklist", `checklist--${accent}`]}>
+  <h3 class="checklist-heading">{heading}</h3>
+  <ul class="checklist-items">
+    {items.map((item) => (
+      <li>
+        <span class="checklist-icon" aria-hidden="true">✓</span>
+        {item}
+      </li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .checklist {
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+  }
+  .checklist-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 2px solid var(--c-navy);
+  }
+  .checklist--entoen .checklist-heading {
+    border-bottom-color: var(--c-entoen);
+  }
+  .checklist-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .checklist-items li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  .checklist-icon {
+    flex-shrink: 0;
+    font-weight: 700;
+    color: var(--c-navy);
+  }
+  .checklist--entoen .checklist-icon {
+    color: var(--c-entoen);
+  }
+</style>

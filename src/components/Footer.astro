@@ -1,0 +1,200 @@
+---
+import { COMPANY, SOCIAL, NAV, LADDER, CTA } from "@config/site.ts";
+const year = new Date().getFullYear();
+const current = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === "/") return current === "/";
+  if (!current.startsWith(href)) return false;
+  const nextChar = current[href.length];
+  return nextChar === "/" || nextChar === undefined;
+};
+---
+
+<footer class="site-footer">
+  {/* フッターのサービスアイコン列（参考デザイン踏襲：サービス導線） */}
+  <div class="footer-services">
+    <div class="container footer-services-inner">
+      {
+        LADDER.map((s) => (
+          <a href={s.href} class:list={["fsvc", { "fsvc-active": isActive(s.href) }]}>
+            <span class="fsvc-no">{String(s.step).padStart(2, "0")}</span>
+            <span class="fsvc-title">{s.title}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+
+  <div class="container footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="/images/logo-mark.png" alt={COMPANY.name} class="logo-img" />
+        <div>
+          <p class="footer-name">{COMPANY.name}</p>
+          <p class="footer-en">{COMPANY.nameEn}</p>
+        </div>
+      </div>
+      <address class="footer-address">
+        {COMPANY.addressFull}<br />
+        TEL：<a href={COMPANY.telLink}>{COMPANY.tel}</a>　FAX：{COMPANY.fax}
+      </address>
+      <p class="footer-description">
+        株式会社新栄テクニカは、プラスチック射出成形金型の修理・設計変更・型更新・新規金型製作を行っています。他社製金型・海外製金型・図面が残っていない金型についてもご相談ください。
+      </p>
+      {
+        SOCIAL.line && (
+          <a href={SOCIAL.line} class="footer-line" target="_blank" rel="noopener">
+            LINEで相談する
+          </a>
+        )
+      }
+    </div>
+
+    <nav class="footer-nav" aria-label="サイトメニュー">
+      <h2 class="footer-h">メニュー</h2>
+      <ul>
+        {NAV.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <nav class="footer-nav" aria-label="金型サービス">
+      <h2 class="footer-h">金型サービス</h2>
+      <ul>
+        {LADDER.map((s) => <li><a href={s.href}>{s.title}</a></li>)}
+        <li><a href={CTA.moldFormHref}>金型相談フォーム</a></li>
+      </ul>
+    </nav>
+
+    <nav class="footer-nav" aria-label="その他">
+      <h2 class="footer-h">会社・その他</h2>
+      <ul>
+        <li><a href="/faq/">よくあるご質問</a></li>
+        <li><a href="/company/">会社案内</a></li>
+        <li><a href="/equipment/">設備一覧</a></li>
+        <li><a href="/entoen/">ENTOEN（循環）</a></li>
+        <li><a href="/privacy/">プライバシーポリシー</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; {year} {COMPANY.nameEn} All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--c-bg-deep);
+    color: #cdd6e3;
+    margin-top: var(--space-12);
+  }
+  .footer-services {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .footer-services-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    padding-block: var(--space-4);
+  }
+  .fsvc {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    color: #cdd6e3;
+    font-size: 0.9rem;
+  }
+  .fsvc-no {
+    font-size: 0.75rem;
+    color: var(--c-navy-300);
+    font-weight: 700;
+  }
+  .fsvc:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer-main {
+    display: grid;
+    gap: var(--space-6);
+    padding-block: var(--space-8);
+  }
+  @media (min-width: 800px) {
+    .footer-main {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    }
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: var(--space-2);
+  }
+  .footer-logo .logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .footer-name {
+    font-weight: 700;
+    color: #fff;
+  }
+  .footer-en {
+    font-size: 0.72rem;
+    color: var(--c-navy-300);
+  }
+  .footer-address {
+    font-style: normal;
+    font-size: 0.88rem;
+    line-height: 1.9;
+  }
+  .footer-description {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: #adb8c8;
+    margin-top: var(--space-3);
+  }
+  .footer-address a {
+    color: #fff;
+  }
+  .footer-line {
+    display: inline-block;
+    margin-top: var(--space-2);
+    padding: 0.5rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+  }
+  .footer-line:hover {
+    background: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+  }
+  .footer-h {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: var(--space-2);
+    letter-spacing: 0.04em;
+  }
+  .footer-nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .footer-nav a {
+    font-size: 0.88rem;
+    color: #cdd6e3;
+  }
+  .footer-nav a:hover {
+    color: #fff;
+  }
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: var(--space-3);
+    font-size: 0.78rem;
+    color: var(--c-navy-300);
+  }
+</style>

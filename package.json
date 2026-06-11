@@ -1,0 +1,19 @@
+{
+  "name": "shinei-tecnica-site",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "株式会社新栄テクニカ サイトリニューアル（Phase 1）1ドメイン・2入口（金型 / ENTOEN）",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "microcms-js-sdk": "^3.1.0"
+  }
+}

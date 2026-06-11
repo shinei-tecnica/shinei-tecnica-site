@@ -1,0 +1,55 @@
+---
+import Base from "@layouts/Base.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { getBlogs, getBlogDetail } from "@lib/microcms.ts";
+import { SITE } from "@config/site.ts";
+
+export async function getStaticPaths() {
+  const blogs = await getBlogs();
+  return blogs.map((b) => ({ params: { id: b.id } }));
+}
+
+const { id } = Astro.params;
+const blog = await getBlogDetail(id!);
+if (!blog) return Astro.redirect("/blog/");
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: blog.title,
+    datePublished: blog.publishedDate,
+    description: blog.metaDescription,
+    publisher: { "@type": "Organization", name: SITE.name },
+  },
+];
+---
+<Base title={blog.title} description={blog.metaDescription} jsonLd={jsonLd}>
+  <script is:inline>
+    window.scrollTo(0, 0);
+  </script>
+  <article class="section">
+    <div class="container container--narrow">
+      <p class="section-en">
+        <span>{blog.category[0]}</span>
+        <time datetime={blog.publishedDate} style="margin-left:0.8rem;">{blog.publishedDate.substring(0, 10)}</time>
+      </p>
+      <h1 class="section-title">{blog.title}</h1>
+      <div class="prose" set:html={blog.body} />
+      <p style="margin-top:var(--space-6);">
+        <a href="/blog/" class="btn btn--outline">一覧に戻る</a>
+      </p>
+    </div>
+  </article>
+  <section class="section section--alt">
+    <div class="container"><CtaBlock /></div>
+  </section>
+</Base>
+
+<style>
+  .prose { margin-top: var(--space-6); line-height: 2; }
+  .prose h2, .prose h3 { margin-top: var(--space-4); font-weight: 700; }
+  .prose p + p { margin-top: 1em; }
+  .prose ul, .prose ol { padding-left: 1.4rem; margin-top: 0.6em; }
+  .prose img { border-radius: var(--radius); margin-block: var(--space-2); }
+</style>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# サンクスページ等はインデックス不要
+Disallow: /thanks/
+
+Sitemap: https://www.shin-ei-tecnica.jp/sitemap-index.xml

@@ -1,0 +1,129 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+
+// 機械設備
+const machinery = [
+  { name: "立形マシニングセンタ", maker: "オークマ", model: "MB-56VA", range: "1050・560・460", qty: 1 },
+  { name: "立形マシニングセンタ", maker: "オークマ", model: "MB-46VA-E", range: "760・460・460", qty: 1 },
+  { name: "ワイヤ放電加工機", maker: "三菱", model: "MV1200R", range: "400・300・220", qty: 1 },
+  { name: "ワイヤ放電加工機", maker: "三菱", model: "FA20M", range: "350・500・280", qty: 1 },
+  { name: "NC放電加工機", maker: "三菱", model: "EA12V", range: "400・300・300", qty: 1 },
+  { name: "NC放電加工機", maker: "三菱", model: "V35-F", range: "350・250・310", qty: 1 },
+  { name: "NCフライス盤", maker: "牧野フライス", model: "AEV-85", range: "800・500・500", qty: 1 },
+  { name: "汎用フライス盤", maker: "牧野フライス", model: "1.5番", range: "500・250・250", qty: 5 },
+  { name: "成形研磨機", maker: "日興機械", model: "NFG-515", range: "350・180・180", qty: 1 },
+  { name: "平面研磨機", maker: "岡本", model: "64EN", range: "600・400・350", qty: 1 },
+  { name: "ラジアルボール盤", maker: "吉田", model: "YR5-150", range: "-", qty: 1 },
+];
+
+// ソフトウェア
+const software = [
+  { type: "3次元CAD", name: "Solidworks", qty: 1 },
+  { type: "3次元CAM", name: "HSMWORKS", qty: 1 },
+  { type: "3次元CAD", name: "VX CAD/CAM", qty: 1 },
+  { type: "3次元CAM", name: "DEPO CAM", qty: 1 },
+];
+---
+<Base
+  title="設備一覧"
+  description="株式会社新栄テクニカの保有設備をご紹介します。マシニングセンタ、ワイヤー放電加工機など最新の加工機械を完備。"
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeading en="EQUIPMENT" title="設備一覧" lead="金型の設計から加工・検査まで、社内設備で対応。
+トライ・成形確認は協力成形工場と連携して対応いたします。" />
+
+      <h3 style="margin-top:var(--space-4); margin-bottom:var(--space-2); font-weight:700;">機械設備</h3>
+      <div class="equipment-table-wrapper">
+        <table class="equipment-table">
+          <thead>
+            <tr>
+              <th>機械名</th>
+              <th>メーカー</th>
+              <th>形式</th>
+              <th>加工範囲(X・Y・Z)</th>
+              <th>台数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {machinery.map((m) => (
+              <tr>
+                <td>{m.name}</td>
+                <td>{m.maker}</td>
+                <td>{m.model}</td>
+                <td>{m.range}</td>
+                <td style="text-align:center;">{m.qty}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:var(--space-6); margin-bottom:var(--space-2); font-weight:700;">ソフトウェア</h3>
+      <div class="equipment-table-wrapper">
+        <table class="equipment-table">
+          <thead>
+            <tr>
+              <th>種類</th>
+              <th>名称</th>
+              <th>台数</th>
+            </tr>
+          </thead>
+          <tbody>
+            {software.map((s) => (
+              <tr>
+                <td>{s.type}</td>
+                <td>{s.name}</td>
+                <td style="text-align:center;">{s.qty}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container"><CtaBlock /></div>
+  </section>
+</Base>
+
+<style>
+  .equipment-table-wrapper {
+    overflow-x: auto;
+    margin-bottom: var(--space-4);
+  }
+  .equipment-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+  .equipment-table thead {
+    background: var(--c-bg-alt);
+  }
+  .equipment-table th {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--c-line);
+    text-align: left;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+  .equipment-table td {
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--c-line);
+    color: var(--c-ink);
+  }
+  .equipment-table tbody tr:hover {
+    background: rgba(22, 36, 61, 0.03);
+  }
+  @media (max-width: 600px) {
+    .equipment-table {
+      font-size: 0.85rem;
+    }
+    .equipment-table th,
+    .equipment-table td {
+      padding: 0.5rem 0.6rem;
+    }
+  }
+</style>

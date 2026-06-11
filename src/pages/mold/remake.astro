@@ -1,0 +1,32 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="射出成形金型の型更新・作り替え"
+  description="修理では品質維持が困難になったプラスチック射出成形金型を作り替えます。図面がなくても現品から対応。寿命判断から型更新・新規製作まで一貫対応します。"
+  ladderKey="remake"
+  heroEn="04 — REMAKE"
+  heroTitle="射出成形金型の型更新・作り替え"
+  heroLead="修理の限界を見極め、新しい型へ。"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.remake.troubles} />
+
+  <h2>老朽化金型の型更新・新規金型への作り替え</h2>
+  <p>
+    修理を繰り返した金型は、やがて品質維持が困難になります。
+    そのような場合は、既存の金型をベースに新しい型として作り替え、最新の品質基準に対応した金型を製作します。
+    図面が残っていなくても現品から形状データを取得し、新規金型製作対応いたします。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">金型の寿命判断・型更新プロセス</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>現品確認</li>
+    <li>劣化状態の確認</li>
+    <li>修理可否判断</li>
+    <li>型更新提案</li>
+    <li>部分作り替え</li>
+    <li>必要に応じた新規金型提案</li>
+  </ul>
+</ServicePage>

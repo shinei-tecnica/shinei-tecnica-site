@@ -1,0 +1,35 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="金型メンテナンス・予防保全｜突発的なトラブルを防ぐ"
+  description="金型の定期メンテナンス・予防保全で、量産中の突発的なトラブルを防ぎます。摩耗・破損・バリ発生などのリスクを早期に把握し、修理か型更新かを判断。他社製・海外製金型にも対応。"
+  ladderKey="maintenance"
+  heroEn="06 — MAINTENANCE"
+  heroTitle="金型メンテナンス・予防保全"
+  heroLead="突発的な金型トラブルを防ぐために。量産中の金型を定期的に確認し、摩耗・破損・バリ発生などのリスクを早期に把握します。"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.maintenance.troubles} />
+
+  <h2>不具合が出る前に、金型の状態を確認します。</h2>
+  <p>
+    金型は量産を続ける中で、摩耗・破損・ガタつき・部品劣化などが少しずつ進行します。
+    新栄テクニカでは、現品確認を通じて金型の状態を把握し、
+    修理が必要な箇所、設変が必要な箇所、型更新を検討すべき箇所を整理します。
+    突発的な生産停止を防ぐための予防保全としてご相談ください。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">金型メンテナンス・予防保全の対応内容</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>金型状態確認</li>
+    <li>摩耗・破損箇所の確認</li>
+    <li>ピン・入れ子・摺動部の確認</li>
+    <li>バリ発生リスクの確認</li>
+    <li>部品交換・修理提案</li>
+    <li>型更新・作り替え時期の相談</li>
+    <li>必要に応じた協力成形工場との成形確認</li>
+  </ul>
+
+</ServicePage>

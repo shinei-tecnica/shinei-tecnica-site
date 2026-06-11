@@ -1,0 +1,98 @@
+---
+// 「ご相談の流れ」5ステップ図（アイコン＋矢印の横並び）
+// トップ・金型ハブ・金型相談フォームの3箇所で共通使用
+import { FLOW_STEPS } from "@config/site.ts";
+---
+<div class="flow">
+  <ol class="flow-list">
+    {
+      FLOW_STEPS.map((s, i) => (
+        <>
+          <li class="flow-step">
+            <span class="flow-no">{s.no}</span>
+            <span class="flow-title">{s.title}</span>
+            <span class="flow-desc">{s.desc}</span>
+          </li>
+          {i < FLOW_STEPS.length - 1 && (
+            <li class="flow-arrow" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </li>
+          )}
+        </>
+      ))
+    }
+  </ol>
+</div>
+
+<style>
+  .flow-list {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    counter-reset: none;
+  }
+  .flow-step {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.4rem;
+    min-width: 0;
+  }
+  .flow-no {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--c-navy);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    flex-shrink: 0;
+  }
+  .flow-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+  .flow-desc {
+    font-size: 0.82rem;
+    color: var(--c-ink-soft);
+    line-height: 1.6;
+    max-width: 18ch;
+  }
+  .flow-arrow {
+    display: flex;
+    align-items: center;
+    padding-top: 12px;
+    color: var(--c-navy-300);
+    flex-shrink: 0;
+  }
+  @media (max-width: 700px) {
+    .flow-list {
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .flow-step {
+      flex-direction: row;
+      text-align: left;
+      gap: 0.8rem;
+    }
+    .flow-desc {
+      max-width: none;
+    }
+    .flow-arrow {
+      padding-top: 0;
+      padding-left: 20px;
+    }
+    .flow-arrow svg {
+      transform: rotate(90deg);
+    }
+  }
+</style>

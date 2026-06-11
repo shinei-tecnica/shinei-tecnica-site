@@ -1,0 +1,72 @@
+---
+interface Service {
+  label: string;
+  href: string;
+  desc?: string;
+}
+
+interface Props {
+  services: Service[];
+}
+const { services } = Astro.props;
+---
+<div class="related-services">
+  <h3 style="font-weight:700; margin-bottom:var(--space-3);">関連サービス</h3>
+  <div class="services-links">
+    {services.map((service) => (
+      <a href={service.href} class="service-link">
+        <div class="service-content">
+          <div class="service-label">{service.label}</div>
+          {service.desc && <div class="service-desc">{service.desc}</div>}
+        </div>
+        <span class="service-arrow" aria-hidden="true">▶</span>
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .related-services {
+    margin-bottom: var(--space-6);
+  }
+  .services-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .service-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius);
+    color: var(--c-navy);
+    font-weight: 500;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .service-link:hover {
+    background: var(--c-bg-alt);
+    border-color: var(--c-navy);
+    text-decoration: none;
+  }
+  .service-content {
+    flex: 1;
+  }
+  .service-label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--c-ink-soft);
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .service-arrow {
+    flex-shrink: 0;
+    font-size: 0.9em;
+    margin-top: 0.2rem;
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="他社製・図面なし射出成形金型対応"
+  description="他社製金型や海外製金型、図面が残っていないプラスチック射出成形金型にも対応。現品から形状を読み取り、修理・設計変更・型更新まで一貫対応いたします。"
+  ladderKey="third-party"
+  heroEn="03 — THIRD PARTY & DRAWING-FREE"
+  heroTitle="他社製・図面なし射出成形金型対応"
+  heroLead="他社製・海外製、図面が残っていない金型でも、現品から対応いたします。"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.thirdParty.troubles} />
+
+  <h2>他社製・海外製・図面なし金型の修理・対応</h2>
+  <p>
+    金型メーカーの廃業、事業承継、図面の紛失など、様々な理由で他社製金型や図面が残っていない金型をお持ちのお客様に対応しています。
+    海外製金型や製造元が不明な金型でも、実際の金型を確認させていただき、形状・材質・機構から
+    修理・設計変更・型更新など最適な対応方法をご提案します。
+  </p>
+
+  <p style="margin-top:var(--space-3);">
+    中国製金型、海外調達金型、国内引継ぎ案件など、様々な背景を持つ射出成形金型の修理や設計変更に対応した実績があります。
+    製造元が不明な場合でも、金型の状態を丁寧に確認し、最適な解決策をご提案いたします。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">他社製・図面なし金型への対応プロセス</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>現品確認</li>
+    <li>金型状態の確認</li>
+    <li>破損・摩耗箇所の確認</li>
+    <li>必要箇所の測定</li>
+    <li>修理可否判断</li>
+    <li>設変可否判断</li>
+    <li>必要に応じた部品製作</li>
+    <li>図面化・データ作成の検討</li>
+    <li>型更新・作り替えの提案</li>
+  </ul>
+</ServicePage>

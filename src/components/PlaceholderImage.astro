@@ -1,0 +1,41 @@
+---
+// 写真素材が届くまでのプレースホルダ画像コンポーネント
+// 本番写真に差し替え後は削除してください
+interface Props {
+  width?: number;
+  height?: number;
+  label?: string;
+  bg?: string;
+}
+const { width = 600, height = 400, label = "写真準備中", bg = "#e8ecf0" } = Astro.props;
+---
+<div class="ph" style={`background:${bg}; aspect-ratio:${width}/${height};`}>
+  <svg viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="ph-icon" aria-hidden="true">
+    <rect x="20" y="15" width="80" height="55" rx="4" stroke="#a0aab4" stroke-width="2" fill="none"/>
+    <circle cx="42" cy="35" r="8" stroke="#a0aab4" stroke-width="2" fill="none"/>
+    <path d="M20 55 l25-18 15 12 20-22 20 28" stroke="#a0aab4" stroke-width="2" fill="none" stroke-linejoin="round"/>
+  </svg>
+  <span class="ph-label">{label}</span>
+</div>
+
+<style>
+  .ph {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    min-height: 120px;
+  }
+  .ph-icon {
+    width: 60px;
+    height: auto;
+    opacity: 0.5;
+  }
+  .ph-label {
+    font-size: 0.78rem;
+    color: #8a95a3;
+  }
+</style>

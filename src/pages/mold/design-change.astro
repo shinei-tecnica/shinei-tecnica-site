@@ -1,0 +1,33 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="射出成形金型の設計変更（設変）"
+  description="プラスチック射出成形金型の設計変更（設変）に対応。製品仕様の変更に伴う金型の修正、入子交換・スライド改修・形状変更など、既存金型を活かした対応をご提案します。"
+  ladderKey="design-change"
+  heroEn="02 — DESIGN CHANGE"
+  heroTitle="射出成形金型の設計変更（設変）"
+  heroLead="製品仕様の変更に、金型を合わせます。"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.designChange.troubles} />
+
+  <h2>金型設計変更による製品仕様変更への対応</h2>
+  <p>
+    製品の形状変更、寸法変更、材料変更などの仕様変更に伴う、金型設計変更（金型設変）に対応します。
+    既存の金型を活かし、入子交換やスライド改修など、必要な部分だけを修正することで
+    コストと納期を大幅に削減できます。射出成形金型のあらゆる設変対応が可能です。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">金型設計変更の対応方法</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>入れ子改造</li>
+    <li>形状変更</li>
+    <li>寸法変更</li>
+    <li>部品追加</li>
+    <li>現品確認</li>
+    <li>設計検討</li>
+    <li>必要に応じた部品製作</li>
+  </ul>
+</ServicePage>

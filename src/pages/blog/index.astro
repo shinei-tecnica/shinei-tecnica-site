@@ -1,0 +1,35 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import { getBlogs } from "@lib/microcms.ts";
+const allBlogs = await getBlogs();
+const blogs = allBlogs.filter(post =>
+  post.category.some(cat => ["お知らせ", "活動実績", "ENTOEN活動報告"].includes(cat))
+);
+---
+<Base title="ブログ・お知らせ" description="金型の修理事例、技術記事、お知らせなどを掲載しています。">
+  <section class="section">
+    <div class="container">
+      <SectionHeading en="BLOG" title="ブログ・お知らせ" />
+      <div class="grid grid--2">
+        {blogs.map((b) => (
+          <a href={`/blog/${b.id}/`} class="blog-card card">
+            <span class="blog-meta">
+              <span class="blog-cat">{b.category[0]}</span>
+              <time datetime={b.publishedDate}>{b.publishedDate.substring(0, 10)}</time>
+            </span>
+            <h3 class="blog-title">{b.title}</h3>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .blog-card { display: flex; flex-direction: column; gap: 0.5rem; transition: border-color 0.2s; }
+  .blog-card:hover { text-decoration: none; border-color: var(--c-navy); }
+  .blog-meta { display: flex; gap: 0.6rem; font-size: 0.8rem; color: var(--c-ink-soft); }
+  .blog-cat { font-weight: 700; color: var(--c-navy-300); }
+  .blog-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+</style>

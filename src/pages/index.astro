@@ -1,0 +1,459 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import ChallengesCard from "@components/ChallengesCard.astro";
+import FlowSteps from "@components/FlowSteps.astro";
+import LadderNav from "@components/LadderNav.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { SITE, COMPANY, CTA, LADDER } from "@config/site.ts";
+import { getBlogs } from "@lib/microcms.ts";
+
+const allBlogs = await getBlogs();
+const recentPosts = allBlogs
+  .filter(post => post.category.some(cat => ["お知らせ", "活動実績", "ENTOEN活動報告"].includes(cat)))
+  .slice(0, 5);
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: COMPANY.name,
+    url: SITE.url,
+    telephone: COMPANY.tel,
+    address: {
+      "@type": "PostalAddress",
+      postalCode: COMPANY.postalCode,
+      addressRegion: COMPANY.prefecture,
+      addressLocality: COMPANY.city,
+      streetAddress: COMPANY.address,
+      addressCountry: "JP",
+    },
+    description: SITE.defaultDescription,
+  },
+];
+---
+<Base
+  title="射出成形金型の修理・設計変更・型更新"
+  jsonLd={jsonLd}
+>
+  {/* ── ヒーロー ── */}
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="hero-kicker">SHINEI TECNICA</p>
+        <h1 class="hero-title">
+          図面がなくても。<br />他社製でも。<br />まずはご相談ください。
+        </h1>
+        <p class="hero-lead">
+          他社製・海外製・図面なしにも対応。<br />
+          プラスチック射出成形金型の修理・設計変更・型更新・新規金型製作までご相談ください。
+        </p>
+        <div class="hero-actions">
+          <a href={CTA.moldFormHref} class="btn btn--primary btn--lg">
+            {CTA.moldPrimaryLabel}
+          </a>
+          <a href="/mold/" class="btn btn--outline btn--lg">
+            金型でお困りの方 ▶
+          </a>
+        </div>
+        <a href="/entoen/" class="hero-sub">
+          ENTOEN（循環実装）廃材を価値ある製品へ ▶
+        </a>
+      </div>
+      <div class="hero-visual">
+        <img src="/images/homepage-hero.jpg" width={560} height={400} alt="修理現場・職人の手" style="width: 100%; height: auto; border-radius: 12px; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+
+  {/* ── こんなお困りごとはありませんか ── */}
+  <section class="section section--alt" id="who">
+    <div class="container">
+      <SectionHeading
+        en="COMMON CHALLENGES"
+        title="こんなお困りごとはありませんか？"
+      />
+      <div class="grid grid--2">
+        <ChallengesCard
+          heading="金型の課題でお困りの方"
+          items={[
+            "バリが止まらない",
+            "金型が破損した",
+            "設計変更したい",
+            "図面がなく対応を断られた",
+            "他社製金型を修理したい",
+            "成形不良の原因が分からない",
+          ]}
+          desc="バリ、破損、成形不良などの金型トラブルから、設計変更、新規金型製作まで。プラスチック射出成形金型の修理・設変・新規金型の全てにご対応します。"
+          buttonLabel="対応サービスを見る"
+          buttonHref="/mold/"
+          variant="primary"
+        />
+        <ChallengesCard
+          heading="廃プラスチックの活用をご検討の方"
+          items={[
+            "回収したプラスチックの活用方法がない",
+            "廃プラスチックを製品化したい",
+            "ESG・CSR活動を形にしたい",
+            "オリジナルノベルティを作りたい",
+            "地域や学校と連携した循環活動を行いたい",
+          ]}
+          desc="企業で発生する廃プラスチックの活用方法を企画から製品化まで支援します。ノベルティ製作やESG活動、地域連携などの循環実装をご相談いただけます。"
+          buttonLabel="ENTOENを見る"
+          buttonHref="/entoen/"
+          variant="secondary"
+        />
+      </div>
+    </div>
+  </section>
+
+  {/* ── テクニカルソリューション ── */}
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        en="TECHNICAL SOLUTIONS"
+        title="プラスチック射出成形金型の修理・設計変更から新規金型製作まで"
+      />
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-num">01</div>
+          <h3>修理</h3>
+          <p>バリや破損などの金型トラブルを修復。他社製金型や図面なし金型もご相談ください。</p>
+          <a href="/mold/repair/">詳しく見る ▶</a>
+        </div>
+        <div class="service-card">
+          <div class="service-num">02</div>
+          <h3>設計変更（設変）</h3>
+          <p>製品仕様変更時の金型設変に対応。既存金型の改修で工期短縮・コスト削減を実現。</p>
+          <a href="/mold/design-change/">詳しく見る ▶</a>
+        </div>
+        <div class="service-card">
+          <div class="service-num">03</div>
+          <h3>他社製・図面なし対応</h3>
+          <p>海外製や図面が残っていない金型も現品から修理・設変に対応。名古屋から全国対応。</p>
+          <a href="/mold/third-party/">詳しく見る ▶</a>
+        </div>
+        <div class="service-card">
+          <div class="service-num">04</div>
+          <h3>型更新・作り替え</h3>
+          <p>老朽化した金型を新しく作り替え。修理では対応困難な金型の寿命判断もサポート。</p>
+          <a href="/mold/remake/">詳しく見る ▶</a>
+        </div>
+        <div class="service-card">
+          <div class="service-num">05</div>
+          <h3>新規金型製作</h3>
+          <p>プラスチック射出成形金型の新規設計・製作。試作から量産対応まで一貫対応。</p>
+          <a href="/mold/new/">詳しく見る ▶</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── 新栄テクニカが選ばれる理由 ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeading
+        en="WHY CHOOSE US"
+        title="新栄テクニカが選ばれる理由"
+      />
+      <div class="pillars">
+        <div class="pillar">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="20" cy="20" r="11"/><path d="M28 28l12 12"/><path d="M15 20l4 4 7-8"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">成形不良・金型トラブルの原因特定</h3>
+          <p class="pillar-desc">バリや反り、成形不良など複雑な金型トラブルの本質を見抜き、再発防止につなげます。</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 40l14-14"/><path d="M22 26l4-1 12-12a4 4 0 0 0-6-6L20 19l-1 4"/><path d="M28 10l6 6"/><path d="M36 34l-6-6 3-3 6 6a3 3 0 0 1-3 3z"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">迅速な金型修理・設変対応</h3>
+          <p class="pillar-desc">製造現場の緊急事態に対応。修理・部品手配・設計変更まで、短納期で実現。</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="6" y="8" width="22" height="30" rx="2"/><path d="M12 16h10M12 22h10M12 28h6"/><path d="M34 20l6 6-6 6"/><path d="M40 26H30"/>
+            </svg>
+          </div>
+          <h3 class="pillar-title">他社製・海外製・図面なし金型対応</h3>
+          <p class="pillar-desc">現品確認から修理・設変・型更新・新規金型製作まで、どんな金型でも対応可能。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── ご相談から対応までの流れ ── */}
+  <section class="section" id="flow">
+    <div class="container">
+      <SectionHeading
+        en="FLOW"
+        title="ご相談の流れ"
+        lead="まずは写真や状況をお送りください。現物確認が必要な場合はご案内いたします。"
+      />
+      <FlowSteps />
+    </div>
+  </section>
+
+  {/* ── お知らせ ── */}
+  <section class="section section--alt" id="news">
+    <div class="container">
+      <SectionHeading
+        en="NEWS"
+        title="お知らせ"
+      />
+      <ul class="news-list">
+        {recentPosts.map((post) => (
+          <li class="news-item">
+            <a href={`/blog/${post.id}/`}>
+              <time datetime={post.publishedDate} class="news-date">{post.publishedDate.substring(0, 10)}</time>
+              <span class="news-cat">{post.category[0]}</span>
+              <span class="news-title">{post.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <p style="margin-top:var(--space-3);">
+        <a href="/blog/" class="btn btn--outline">お知らせ一覧 ▶</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="section">
+    <div class="container">
+      <CtaBlock />
+    </div>
+  </section>
+
+  {/* ── FAQ ── */}
+  <section class="section section--alt">
+    <div class="container" style="text-align:center; max-width:600px; margin-left:auto; margin-right:auto;">
+      <h2 style="font-size:1.6rem; font-weight:700; margin-bottom:var(--space-2); color:var(--c-navy);">よくあるご質問</h2>
+      <p style="color:var(--c-ink-soft); margin-bottom:var(--space-4);">
+        お問い合わせ前にご確認ください。
+      </p>
+      <a href="/faq/" class="btn btn--outline btn--lg">
+        よくあるご質問を見る ▶
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---- ヒーロー ---- */
+  .hero {
+    position: relative;
+    padding: calc(var(--header-h) + var(--space-8)) 0 var(--space-12);
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(22,36,61,0.07) 0%, transparent 50%),
+      linear-gradient(to bottom, var(--c-bg-alt) 0%, var(--c-bg) 100%);
+    z-index: -1;
+  }
+  .hero-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .hero-content {
+    flex: 1 1 55%;
+    min-width: 0;
+  }
+  .hero-visual {
+    flex: 0 1 40%;
+    min-width: 0;
+  }
+  @media (max-width: 860px) {
+    .hero-inner {
+      flex-direction: column;
+    }
+    .hero-visual {
+      width: 100%;
+    }
+  }
+  .hero-kicker {
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--c-navy-300);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .hero-title {
+    font-size: clamp(1.7rem, 5vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.4;
+    color: var(--c-navy);
+    margin-bottom: var(--space-3);
+  }
+  .hero-lead {
+    font-size: 1.05rem;
+    color: var(--c-ink-soft);
+    line-height: 1.9;
+    max-width: 60ch;
+    margin-bottom: var(--space-4);
+  }
+  .hero-actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+  }
+  .hero-sub {
+    font-size: 0.9rem;
+    color: var(--c-entoen);
+    font-weight: 500;
+  }
+  .hero-sub:hover {
+    text-decoration: underline;
+  }
+
+  /* ---- お知らせ ---- */
+  .news-list {
+    display: flex;
+    flex-direction: column;
+  }
+  .news-item {
+    border-bottom: 1px solid var(--c-line);
+  }
+  .news-item a {
+    display: grid;
+    grid-template-columns: minmax(100px, auto) minmax(110px, auto) 1fr;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 0;
+    transition: background 0.15s;
+  }
+  .news-item a:hover {
+    text-decoration: none;
+    background: rgba(22, 36, 61, 0.02);
+  }
+  .news-date {
+    font-size: 0.85rem;
+    color: var(--c-ink-soft);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .news-cat {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--c-navy-300);
+    background: var(--c-bg-alt);
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .news-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  @media (max-width: 600px) {
+    .news-item a {
+      flex-wrap: wrap;
+      gap: 0.3rem 0.6rem;
+    }
+  }
+
+  /* ---- 特長アイコン行 ---- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+  .pillar {
+    text-align: center;
+  }
+  .pillar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 0.6rem;
+    background: var(--c-bg);
+    border: 1.5px solid var(--c-line);
+    border-radius: 50%;
+    color: var(--c-navy);
+  }
+  .pillar-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+  .pillar-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .pillar-desc {
+    font-size: 0.9rem;
+    color: var(--c-ink-soft);
+    line-height: 1.7;
+  }
+
+  /* ---- サービスカード ---- */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+  }
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    text-align: center;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .service-card:hover {
+    border-color: var(--c-navy);
+    background: #fff;
+    box-shadow: var(--shadow-md);
+  }
+  .service-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--c-navy-300);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+  .service-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--c-navy);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--c-ink-soft);
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: var(--space-2);
+  }
+  .service-card a {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--c-navy);
+    transition: color 0.2s;
+  }
+  .service-card a:hover {
+    color: var(--c-navy-700);
+    text-decoration: none;
+  }
+</style>

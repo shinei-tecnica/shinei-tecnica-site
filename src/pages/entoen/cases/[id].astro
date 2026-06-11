@@ -1,0 +1,76 @@
+---
+import Base from "@layouts/Base.astro";
+import { getCases } from "@lib/microcms.ts";
+
+export async function getStaticPaths() {
+  const cases = await getCases();
+  return cases.map((caseItem) => ({
+    params: { id: caseItem.id },
+    props: { caseItem },
+  }));
+}
+
+interface Props {
+  caseItem: any;
+}
+
+const { caseItem } = Astro.props;
+---
+
+<Base
+  title={`${caseItem.title} | ENTOEN 活動事例 | 株式会社新栄テクニカ`}
+  description={caseItem.description}
+  tone="entoen"
+>
+  <script is:inline>
+    window.scrollTo(0, 0);
+  </script>
+  <section class="section" style="padding-top: calc(var(--header-h) + var(--space-8));">
+    <div class="container container--narrow">
+      <div style="margin-bottom: var(--space-6);">
+        <a href="/entoen/cases/" style="color: var(--c-entoen); text-decoration: underline;">← 活動事例一覧に戻る</a>
+      </div>
+
+      <h1 style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; margin-bottom: var(--space-2);">
+        {caseItem.title}
+      </h1>
+
+      <div style="display: flex; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap;">
+        <span style="background: rgba(47, 125, 118, 0.1); padding: 0.4rem 0.8rem; border-radius: var(--radius); font-size: 0.85rem; color: var(--c-entoen); font-weight: 600;">
+          {caseItem.category}
+        </span>
+        <time datetime={caseItem.publishedDate} style="color: var(--c-ink-soft); font-size: 0.9rem;">
+          {new Date(caseItem.publishedDate).toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })}
+        </time>
+      </div>
+
+      {caseItem.image && (
+        <div style="margin-bottom: var(--space-6); border-radius: var(--radius-lg); overflow: hidden; max-height: 500px;">
+          <img src={caseItem.image.url} alt={caseItem.title} style="width: 100%; height: auto; display: block;" />
+        </div>
+      )}
+
+      <div style="font-size: 1rem; line-height: 1.8; color: var(--c-ink);">
+        <p style="margin-bottom: var(--space-3);">
+          {caseItem.description}
+        </p>
+      </div>
+
+      <div style="margin-top: var(--space-8); padding-top: var(--space-6); border-top: 1px solid var(--c-line);">
+        <a href="/entoen/" class="btn btn--primary btn--lg">
+          ENTOENについて詳しく見る
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .section {
+    min-height: 60vh;
+  }
+</style>

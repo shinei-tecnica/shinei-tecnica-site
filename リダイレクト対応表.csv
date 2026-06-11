@@ -1,0 +1,7 @@
+旧URL,新URL,ステータス,備考
+/index.html,/,301,トップ
+/business.html,/mold/,301,旧「事業内容」→金型ハブ
+/company.html,/company/,301,会社概要
+/contact.html,/contact/mold/,301,旧お問い合わせ→金型相談フォーム
+/cgi-bin/form/form.cgi?id=24,/contact/mold/,301,【要確認】旧CGIフォーム（id=24）。実パスとパラメータを要確認のうえ有効化
+,,,※旧CGIの全URLパターン（id一覧）が不明。サーバーログ/旧サイトHTMLから洗い出しが必要

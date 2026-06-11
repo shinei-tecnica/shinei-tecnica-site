@@ -1,0 +1,24 @@
+---
+// GA4 計測タグ。PUBLIC_GA4_ID が未設定なら何も出力しません。
+import { ANALYTICS } from "@config/site.ts";
+const id = ANALYTICS.ga4Id;
+---
+{
+  id && (
+    <>
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${id}`}
+      />
+      <script is:inline define:vars={{ id }}>
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', id);
+        `}
+      </script>
+    </>
+  )
+}

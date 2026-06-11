@@ -1,0 +1,74 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { getWorks, getBlogs } from "@lib/microcms.ts";
+const works = await getWorks();
+const allBlogs = await getBlogs();
+const articles = allBlogs.filter(post =>
+  post.category.some(cat => ["技術記事", "金型修理事例"].includes(cat))
+);
+---
+<Base
+  title="実績紹介"
+  description="金型の修理・設計変更・型の作り替え・新規製作の実績をご紹介します。"
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeading en="WORKS" title="実績紹介" lead="金型の課題解決の実績をご紹介します。" />
+      <div class="grid grid--3">
+        {works.map((w) => (
+          <a href={`/works/${w.id}/`} class="work-card card">
+            {w.images && w.images.length > 0 && (
+              <div class="work-thumb">
+                <img src={w.images[0].url} width={w.images[0].width} height={w.images[0].height} alt={w.title} loading="lazy" />
+              </div>
+            )}
+            <span class="work-cat">{w.category}</span>
+            <h3 class="work-title">{w.title}</h3>
+            <p class="text-soft" style="font-size:0.88rem;">{w.industry}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {articles.length > 0 && (
+    <section class="section section--alt">
+      <div class="container">
+        <SectionHeading en="ARTICLES" title="技術記事・事例紹介" lead="金型に関する技術情報と実例をご紹介します。" />
+        <div class="grid grid--2">
+          {articles.map((a) => (
+            <a href={`/blog/${a.id}/`} class="article-card card">
+              <span class="article-meta">
+                <span class="article-cat">{a.category}</span>
+                <time datetime={a.publishedDate}>{a.publishedDate}</time>
+              </span>
+              <h3 class="article-title">{a.title}</h3>
+              <p style="font-size:0.9rem; color:var(--c-ink-soft); line-height:1.6;">{a.metaDescription}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container"><CtaBlock /></div>
+  </section>
+</Base>
+
+<style>
+  .work-card { display: flex; flex-direction: column; gap: 0.4rem; transition: border-color 0.2s; overflow: hidden; }
+  .work-card:hover { text-decoration: none; border-color: var(--c-navy); }
+  .work-thumb { margin: calc(-1 * var(--space-3)) calc(-1 * var(--space-3)) 0.4rem; overflow: hidden; background: var(--c-bg-alt); }
+  .work-thumb img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s; }
+  .work-card:hover .work-thumb img { transform: scale(1.03); }
+  .work-cat { font-size: 0.78rem; font-weight: 700; color: var(--c-navy-300); letter-spacing: 0.04em; }
+  .work-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+  .article-card { display: flex; flex-direction: column; gap: 0.6rem; transition: border-color 0.2s; }
+  .article-card:hover { text-decoration: none; border-color: var(--c-navy); }
+  .article-meta { display: flex; gap: 0.6rem; font-size: 0.8rem; color: var(--c-ink-soft); }
+  .article-cat { font-weight: 700; color: var(--c-navy-300); }
+  .article-title { font-size: 1rem; font-weight: 700; line-height: 1.4; }
+</style>

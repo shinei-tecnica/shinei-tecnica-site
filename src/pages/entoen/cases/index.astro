@@ -1,0 +1,103 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import { getCases } from "@lib/microcms.ts";
+
+const cases = await getCases();
+---
+
+<Base
+  title="ENTOEN 活動事例一覧 | 廃プラスチック製品化・循環実装 | 株式会社新栄テクニカ"
+  description="ENTOENの活動事例を一覧でご紹介。廃プラスチック製品化、学校連携、企業連携による循環実装の取り組みをご覧ください。"
+  tone="entoen"
+>
+  <section class="section" style="padding-top: calc(var(--header-h) + var(--space-8));">
+    <div class="container">
+      <SectionHeading
+        en="CASE STUDIES"
+        title="活動事例一覧"
+        lead="ENTOENの廃プラスチック製品化と循環実装の取り組み、実績をご紹介します。"
+      />
+
+      <div class="grid grid--3" style="margin-top: var(--space-6);">
+        {cases.map((caseItem) => (
+          <a href={`/entoen/cases/${caseItem.id}/`} class="case-card-link">
+            <div class="case-card">
+              {caseItem.image && (
+                <div class="case-image">
+                  <img src={caseItem.image.url} alt={caseItem.title} />
+                </div>
+              )}
+              <div class="case-content">
+                <h3 style="font-weight:700; margin-bottom:0.4rem; font-size:0.95rem;">
+                  {caseItem.title}
+                </h3>
+                <p style="font-size:0.8rem; color:var(--c-entoen); margin-bottom:0.6rem; font-weight:600;">
+                  {caseItem.category}
+                </p>
+                <p style="font-size:0.85rem; color:var(--c-ink-soft); line-height:1.6;">
+                  {caseItem.description}
+                </p>
+                <time datetime={caseItem.publishedDate} style="font-size:0.75rem; color:var(--c-ink-soft); display:block; margin-top:0.8rem;">
+                  {new Date(caseItem.publishedDate).toLocaleDateString("ja-JP", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })}
+                </time>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .grid--3 {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .case-card-link {
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .case-card-link:hover {
+    text-decoration: none;
+  }
+  .case-card {
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .case-card-link:hover .case-card {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(47, 125, 118, 0.15);
+  }
+  .case-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--c-bg-alt);
+  }
+  .case-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .case-content {
+    padding: var(--space-3);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+</style>

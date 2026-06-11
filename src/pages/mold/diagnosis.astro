@@ -1,0 +1,107 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import FlowSteps from "@components/FlowSteps.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { SERVICE_PAGES, CTA } from "@config/site.ts";
+---
+
+<ServicePage
+  title="原因特定・改善 — 成形不良や金型トラブルの原因を見極める"
+  description="成形不良やバリ、反りなど金型トラブルの原因が分からない場合も、新栄テクニカにご相談ください。原因を特定し、修理・設変・型更新など最適な対応をご提案します。"
+  ladderKey="diagnosis"
+  heroEn="DIAGNOSIS"
+  heroTitle="原因特定・改善"
+  heroLead="成形不良や金型トラブルの原因が分からない場合も、まずはご相談ください。修理だけでなく、原因を整理し再発防止につなげます。"
+>
+  {/* CTA */}
+  <div style="display:flex; gap:var(--space-2); margin-top:var(--space-3);">
+    <a href={CTA.moldFormHref} class="btn btn--primary">
+      写真を送ってまず相談
+    </a>
+  </div>
+
+  <ServiceTroubles troubles={SERVICE_PAGES.diagnosis.troubles} />
+
+  <h2>修理の前に、まず原因を整理します</h2>
+  <p>
+    不具合が発生した場合、すぐに修理を行うのではなく、まず原因を整理することが重要です。
+    バリ、反り、寸法不良などの成形不良は、金型・成形条件・材料が複合的に影響するため、
+    現象だけを見て修理しても再発することがあります。
+  </p>
+  <p style="margin-top:var(--space-3);">
+    金型構造、摩耗状況、破損状況などを確認し、原因を把握した上で
+    最適な対策をご提案します。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">対応内容</h3>
+  <div class="grid grid--2" style="margin-top:var(--space-3);">
+    <div class="card">
+      <h4 style="font-weight:700; margin-bottom:0.6rem;">金型状態確認</h4>
+      <p style="font-size:0.9rem; color:var(--c-ink-soft);">摩耗・破損・変形の確認</p>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700; margin-bottom:0.6rem;">原因解析</h4>
+      <p style="font-size:0.9rem; color:var(--c-ink-soft);">不具合要因の整理</p>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700; margin-bottom:0.6rem;">修理提案</h4>
+      <p style="font-size:0.9rem; color:var(--c-ink-soft);">必要な修理内容をご提案</p>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700; margin-bottom:0.6rem;">設計変更提案</h4>
+      <p style="font-size:0.9rem; color:var(--c-ink-soft);">再発防止を目的とした設変対応</p>
+    </div>
+    <div class="card">
+      <h4 style="font-weight:700; margin-bottom:0.6rem;">型更新提案</h4>
+      <p style="font-size:0.9rem; color:var(--c-ink-soft);">修理より更新が適切な場合のご提案</p>
+    </div>
+  </div>
+
+  <section class="section" id="flow">
+    <div class="container">
+      <h2 style="text-align:center; margin-bottom:var(--space-3);">ご相談の流れ</h2>
+      <FlowSteps />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:flex; flex-direction:column; gap:var(--space-3); align-items:center; text-align:center;">
+        <h2 style="margin:0;">写真を送ってまず相談</h2>
+        <div style="display:flex; gap:var(--space-2); flex-wrap:wrap; justify-content:center;">
+          <a href={CTA.moldFormHref} class="btn btn--primary btn--lg">
+            写真を送ってまず相談
+          </a>
+          <a href={`tel:${CTA.moldFormHref?.match(/tel:(.+)/)?.[1] || ''}`} class="btn btn--outline btn--lg">
+            電話で相談する
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</ServicePage>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .grid--2 {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  .card {
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+  }
+  .card h4 {
+    margin: 0;
+  }
+  .btn--lg {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+</style>

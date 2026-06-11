@@ -1,0 +1,18 @@
+# ═══════════════════════════════════════════════════════════════
+#  Netlify リダイレクト設定（旧URL → 新URL の 301）
+#  形式:  /旧パス   /新パス   ステータスコード
+#  ※ 旧CGI URL（id=24 等）の実体は【要確認】。判明し次第ここに追記。
+#     対応表は リダイレクト対応表.csv も参照。
+# ═══════════════════════════════════════════════════════════════
+
+# 旧 静的HTML（前サイト）
+/index.html      /             301
+/business.html   /mold/        301
+/company.html    /company/     301
+/contact.html    /contact/mold/ 301
+
+# 旧 CGI（要確認：実URLパターンが判明したら有効化）
+# 例) /cgi-bin/form/form.cgi?id=24  → /contact/mold/
+# /cgi-bin/*   /contact/mold/   301
+
+# SPA的フォールバックは不要（静的サイト）。404は Netlify 既定 or /404.html

@@ -1,0 +1,111 @@
+---
+// 共通CTAブロック（フォーム + 電話 + LINE）
+import { CTA, COMPANY, SOCIAL, ANALYTICS } from "@config/site.ts";
+
+interface Props {
+  variant?: "mold" | "entoen";
+  heading?: string;
+  lead?: string;
+}
+const { variant = "mold", heading, lead } = Astro.props;
+
+const isMold = variant === "mold";
+const formHref = isMold ? CTA.moldFormHref : CTA.entoenFormHref;
+const formLabel = isMold ? CTA.moldPrimaryLabel : CTA.entoenLabel;
+const btnClass = isMold ? "btn--primary" : "btn--entoen";
+---
+<div class:list={["cta-block", { "cta-block--entoen": !isMold }]}>
+  <div class="cta-block-text">
+    <h2 class="cta-block-heading">
+      {heading ?? (isMold
+        ? "図面がなくても、他社製でも、まずはご相談ください。"
+        : "廃材を価値ある製品に。まずはお気軽にご相談ください。")}
+    </h2>
+    {lead && <p class="cta-block-lead">{lead}</p>}
+    <p class="cta-block-micro">{CTA.responseMicrocopy}</p>
+  </div>
+  <div class="cta-block-actions">
+    <a href={formHref} class={`btn ${btnClass} btn--lg`}>{formLabel}</a>
+    <div class="cta-block-sub">
+      <a
+        href={COMPANY.telLink}
+        class="cta-tel"
+        data-ga-event={ANALYTICS.events.telTap}
+      >
+        <span class="cta-tel-label">電話で相談する</span>
+        <span class="cta-tel-num">{COMPANY.tel}</span>
+        <span class="cta-tel-hours">{COMPANY.businessHours}</span>
+      </a>
+      {SOCIAL.line && (
+        <a
+          href={SOCIAL.line}
+          class="btn btn--ghost"
+          target="_blank"
+          rel="noopener"
+          data-ga-event={ANALYTICS.events.lineTap}
+        >
+          LINEで相談する
+        </a>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  .cta-block {
+    background: var(--c-bg-alt);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6) var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  .cta-block--entoen {
+    background: var(--c-entoen-soft);
+  }
+  .cta-block-text {
+    flex: 1 1 360px;
+  }
+  .cta-block-heading {
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .cta-block-lead {
+    margin-top: 0.6rem;
+    color: var(--c-ink-soft);
+  }
+  .cta-block-micro {
+    margin-top: 0.8rem;
+    font-size: 0.85rem;
+    color: var(--c-ink-soft);
+  }
+  .cta-block-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    flex-shrink: 0;
+  }
+  .cta-block-sub {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  .cta-tel {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  .cta-tel-num {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--c-navy);
+    letter-spacing: 0.04em;
+  }
+  .cta-tel-hours {
+    font-size: 0.78rem;
+    color: var(--c-ink-soft);
+  }
+</style>

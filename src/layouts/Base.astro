@@ -1,0 +1,101 @@
+---
+/* ───────────────────────────────────────────────
+ *  全ページ共通レイアウト
+ *  props:
+ *   - title       : ページ固有タイトル（末尾に会社名が自動付与）
+ *   - description  : meta description（未指定は既定文）
+ *   - ogImage      : OGP画像パス（未指定は既定画像）
+ *   - noindex      : true で検索エンジンに登録させない（thanksページ等）
+ *   - tone         : "mold"（既定・紺）/ "entoen"（青緑）でトーン切替
+ *   - jsonLd       : JSON-LD構造化データの配列（任意）
+ * ─────────────────────────────────────────────── */
+import { SITE } from "@config/site.ts";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import MobileBar from "@components/MobileBar.astro";
+import Analytics from "@components/Analytics.astro";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  noindex?: boolean;
+  tone?: "mold" | "entoen";
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description = SITE.defaultDescription,
+  ogImage = SITE.defaultOgImage,
+  noindex = false,
+  tone = "mold",
+  jsonLd = [],
+} = Astro.props;
+
+const fullTitle = title ? `${title}｜${SITE.titleSuffix}` : SITE.titleSuffix;
+const canonical = new URL(Astro.url.pathname, SITE.url).href;
+const ogImageUrl = new URL(ogImage, SITE.url).href;
+---
+
+<!doctype html>
+<html lang={SITE.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/images/logo-mark.png" />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+
+    <script is:inline>
+      // CSS で scroll-behavior を auto に設定（アニメーションなし）
+      document.documentElement.style.scrollBehavior = 'auto';
+
+      // ブラウザのネイティブなスクロール復元を有効化
+      window.history.scrollRestoration = 'auto';
+    </script>
+
+    {/* OGP / Twitter */}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:locale" content={SITE.locale} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/* フォント：Noto Sans JP */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    {/* JSON-LD 構造化データ */}
+    {
+      jsonLd.map((data) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(data)}
+        />
+      ))
+    }
+
+    <Analytics />
+  </head>
+  <body data-tone={tone}>
+    <a href="#main" class="skip-link">本文へスキップ</a>
+    <Header tone={tone} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+  </body>
+</html>

@@ -1,0 +1,52 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { getVoices } from "@lib/microcms.ts";
+import { SITE, COMPANY } from "@config/site.ts";
+
+const voices = await getVoices();
+
+const jsonLd = voices.map((v) => ({
+  "@context": "https://schema.org",
+  "@type": "Review",
+  author: { "@type": "Person", name: v.clientType },
+  reviewBody: v.comment,
+  itemReviewed: { "@type": "LocalBusiness", name: COMPANY.name },
+}));
+---
+<Base
+  title="お客様の声"
+  description="金型の修理・設変・作り替えをご依頼いただいたお客様の声をご紹介します。"
+  jsonLd={jsonLd}
+>
+  <section class="section">
+    <div class="container">
+      <SectionHeading en="VOICE" title="お客様の声" lead="実際にご依頼いただいたお客様からのコメントです。" />
+      <div class="grid grid--2">
+        {voices.map((v) => (
+          <blockquote class="voice-card card">
+            <p class="voice-summary">{v.caseSummary}</p>
+            <p class="voice-comment">{v.comment}</p>
+            <footer class="voice-client">
+              {v.clientType}
+              {v.relatedWork && (
+                <a href={`/works/${v.relatedWork.id}/`} style="margin-left:0.5rem; font-size:0.82rem;">実績を見る →</a>
+              )}
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container"><CtaBlock /></div>
+  </section>
+</Base>
+
+<style>
+  .voice-card { display: flex; flex-direction: column; gap: 0.6rem; }
+  .voice-summary { font-weight: 700; font-size: 1rem; }
+  .voice-comment { font-size: 0.95rem; line-height: 1.8; color: var(--c-ink); }
+  .voice-client { font-size: 0.85rem; color: var(--c-ink-soft); margin-top: auto; padding-top: 0.5rem; border-top: 1px solid var(--c-line); }
+</style>

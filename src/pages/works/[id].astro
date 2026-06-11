@@ -1,0 +1,83 @@
+---
+import Base from "@layouts/Base.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { getWorks, getWorkDetail } from "@lib/microcms.ts";
+
+export async function getStaticPaths() {
+  const works = await getWorks();
+  return works.map((w) => ({ params: { id: w.id } }));
+}
+
+const { id } = Astro.params;
+const work = await getWorkDetail(id!);
+if (!work) return Astro.redirect("/works/");
+---
+<Base title={work.title} description={work.metaDescription}>
+  <section class="section">
+    <div class="container container--narrow">
+      <p class="section-en">{work.category}　|　{work.industry}</p>
+      <h1 class="section-title">{work.title}</h1>
+
+      {/* 写真ギャラリー */}
+      {work.images && work.images.length > 0 && (
+        <div class="wd-gallery">
+          {work.images.map((img, i) => (
+            <figure class="wd-photo">
+              <img
+                src={img.url}
+                width={img.width}
+                height={img.height}
+                alt={`${work.title} 写真${i + 1}`}
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+            </figure>
+          ))}
+        </div>
+      )}
+
+      <div class="wd-block">
+        <h2 class="wd-label">課題</h2>
+        <p>{work.problem}</p>
+      </div>
+      <div class="wd-block">
+        <h2 class="wd-label">対応</h2>
+        <p>{work.solution}</p>
+      </div>
+      <div class="wd-block">
+        <h2 class="wd-label">ポイント</h2>
+        <p>{work.point}</p>
+      </div>
+
+      <p style="margin-top:var(--space-4);">
+        <a href="/works/" class="btn btn--outline">実績一覧に戻る</a>
+      </p>
+    </div>
+  </section>
+  <section class="section section--alt">
+    <div class="container"><CtaBlock /></div>
+  </section>
+</Base>
+
+<style>
+  .wd-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-2);
+    margin-top: var(--space-4);
+  }
+  .wd-photo {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-line);
+  }
+  .wd-photo img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .wd-block { margin-top: var(--space-4); padding-top: var(--space-3); border-top: 1px solid var(--c-line); }
+  .wd-block:first-of-type { margin-top: var(--space-6); }
+  .wd-label { font-size: 0.85rem; font-weight: 700; color: var(--c-navy); letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+  .wd-block p { line-height: 1.9; }
+</style>

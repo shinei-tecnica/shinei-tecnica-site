@@ -1,0 +1,152 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import LadderNav from "@components/LadderNav.astro";
+import FlowSteps from "@components/FlowSteps.astro";
+import DifficultCases from "@components/DifficultCases.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { CTA } from "@config/site.ts";
+---
+<Base
+  title="金型でお困りの方 — 修理・設変・新規金型のご相談"
+  description="金型の修理・設計変更・型の作り替え・新規金型製作、成形不良の原因特定に対応。他社製・図面なしの金型もお受けします。名古屋の新栄テクニカにご相談ください。"
+>
+  {/* ── ヒーロー ── */}
+  <section class="section">
+    <div class="container">
+      <div style="display:flex; gap:var(--space-6); align-items:center; flex-wrap:wrap;">
+        <div style="flex:1 1 55%; min-width:280px;">
+          <p class="section-en">MOLD SERVICE</p>
+          <h1 class="section-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">
+            図面がなくても。<br />他社製でも。<br />修理から新規金型まで対応。
+          </h1>
+          <p class="section-lead">
+            他社製・海外製、図面が残っていない金型でも、まずはご相談ください。<br />
+            状態を確認し、修理・設計変更・型更新・新規金型製作まで最適な対応をご提案します。
+          </p>
+          <p style="margin-top:1.5rem;">
+            <a href={CTA.moldFormHref} class="btn btn--primary btn--lg">{CTA.moldPrimaryLabel}</a>
+          </p>
+        </div>
+        <div style="flex:0 1 40%; min-width:240px;">
+          <img src="/images/mold-hero.jpg" width={480} height={340} alt="修理現場・職人の手" style="width: 100%; height: auto; border-radius: 12px; object-fit: cover;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── 5段ラダー ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <SectionHeading
+        en="TECHNICAL SOLUTIONS"
+        title="課題に応じた対応サービス"
+        lead="修理・設計変更・型更新・新規金型製作から、最適なソリューションをご提案します。"
+      />
+      <LadderNav />
+    </div>
+  </section>
+
+  {/* ── なぜ修理依頼が増えているのか（概要→詳細ページへ） ── */}
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        en="WHY REPAIR NEEDS ARE GROWING"
+        title="なぜ修理依頼が増えているのか"
+        lead="金型修理のご相談が増えている背景には、業界共通の4つの状況があります。"
+      />
+      <div class="grid grid--2">
+        <a href="/mold/why-repair/#closure" class="reason-card">
+          <h3>金型メーカーの廃業・事業承継</h3>
+          <p>製作元が廃業し、修理先がなくなった金型を引き受けます。</p>
+        </a>
+        <a href="/mold/why-repair/#lost-drawing" class="reason-card">
+          <h3>図面の紛失</h3>
+          <p>図面がなくても現品から形状を読み取り対応します。</p>
+        </a>
+        <a href="/mold/why-repair/#overseas" class="reason-card">
+          <h3>海外調達型のトラブル</h3>
+          <p>海外製金型の不具合・修理にも対応可能です。</p>
+        </a>
+        <a href="/mold/why-repair/#retirement" class="reason-card">
+          <h3>ベテランの退職</h3>
+          <p>社内に直せる人がいない場合、原因特定から改善・予防保全まで。</p>
+        </a>
+      </div>
+      <p style="margin-top:1.5rem;">
+        <a href="/mold/why-repair/" class="btn btn--outline">詳しく見る ▶</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ── 高intent入口（アンカーセクション） ── */}
+  <section class="section section--alt" id="special">
+    <div class="container">
+      <SectionHeading
+        en="SPECIAL CASES"
+        title="こんなケースもご相談ください"
+      />
+      <div class="grid grid--3">
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:0.5rem;">他社製金型の修理</h3>
+          <p class="text-soft">国内外メーカー問わず、他社で製作された金型の修理・設変に対応します。</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:0.5rem;">図面がない金型の対応</h3>
+          <p class="text-soft">現品から形状を読み取り、修理・型の作り替えを行います。</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700;margin-bottom:0.5rem;">急ぎ・短納期のご相談</h3>
+          <p class="text-soft">金型部品の即日手配も可能。まずは状況をお聞かせください。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── ご相談の流れ ── */}
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        en="FLOW"
+        title="ご相談の流れ"
+      />
+      <FlowSteps />
+    </div>
+  </section>
+
+  {/* ── 対応が難しいケース + CTA ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <DifficultCases />
+      <div style="margin-top:var(--space-6);">
+        <CtaBlock />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .reason-card {
+    display: block;
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .reason-card:hover {
+    text-decoration: none;
+    border-color: var(--c-navy);
+    box-shadow: var(--shadow-md);
+  }
+  .reason-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+  .reason-card p {
+    font-size: 0.9rem;
+    color: var(--c-ink-soft);
+    line-height: 1.7;
+  }
+</style>

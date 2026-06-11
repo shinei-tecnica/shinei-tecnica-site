@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(\"---\")",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\sne1\\\\Desktop\\\\WebSite\\\\src\" -Recurse -File | Select-Object @{N='Path';E={$_.FullName.Replace\\('C:\\\\Users\\\\sne1\\\\Desktop\\\\WebSite\\\\',''\\)}} | Sort-Object Path | Format-Table -AutoSize)",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell($env:Path = \"C:\\\\Users\\\\sne1\\\\AppData\\\\Local\\\\Microsoft\\\\WinGet\\\\Packages\\\\OpenJS.NodeJS.LTS_Microsoft.Winget.Source_8wekyb3d8bbwe\\\\node-v24.16.0-win-x64;$env:Path\"; cd C:\\\\Users\\\\sne1\\\\Desktop\\\\WebSite; node node_modules/astro/astro.js build 2>&1 | tail -20)",
+      "Bash(find ~/ -name \"*.png\" -type f -mmin -5 2>/dev/null | head -10)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\sne1\\\\Desktop\\\\WebSite\" -Recurse -Filter \"*.tsx\" -o Name)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(netstat -ano)",
+      "Bash(npm run *)",
+      "Bash(netstat -tln)",
+      "Bash(curl -s http://localhost:4321/)",
+      "Bash(curl -s http://localhost:4321/blog/)"
+    ]
+  }
+}

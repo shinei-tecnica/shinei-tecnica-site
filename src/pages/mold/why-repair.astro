@@ -1,0 +1,132 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { CTA, SITE, COMPANY } from "@config/site.ts";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "金型メーカーが廃業した場合、金型の修理はどこに相談できますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "新栄テクニカでは、他社製金型の修理・設計変更・型の作り替えに対応しています。製作元が廃業・事業承継された金型もお受けします。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "図面がない金型でも修理できますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "はい。現品から形状を読み取り、修理や型の作り替えを行います。図面が紛失した金型もご相談ください。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "海外で調達した金型のトラブルにも対応できますか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "国内外メーカー問わず、他社製金型の修理・設計変更に対応しています。海外調達型のトラブルもご相談ください。",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "社内に金型を直せる技術者がいない場合はどうすればよいですか？",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "成形不良の原因特定から改善策の提案、予防保全まで対応しています。まずは状況をお聞かせください。",
+        },
+      },
+    ],
+  },
+];
+---
+<Base
+  title="なぜ金型の修理依頼が増えているのか"
+  description="金型メーカーの廃業、図面の紛失、海外調達型のトラブル、ベテラン技術者の退職──金型修理の依頼が増えている4つの背景と、新栄テクニカの対応をご紹介します。"
+  jsonLd={jsonLd}
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHeading
+        en="WHY REPAIR NEEDS ARE GROWING"
+        title="なぜ金型の修理依頼が増えているのか"
+        lead="私たちに寄せられるご相談の背景には、業界で共通する4つの状況があります。"
+      />
+
+      <article class="reason" id="closure">
+        <h3 class="reason-title">金型メーカーの廃業・事業承継</h3>
+        <p>長年金型を製作してきたメーカーの廃業や事業承継により、修理やメンテナンスの依頼先がなくなるケースが増えています。</p>
+        <p class="reason-link">
+          → <a href="/mold/repair/">他社製金型の修理</a> ／
+          <a href="/mold/remake/">型の作り替え</a>
+        </p>
+      </article>
+
+      <article class="reason" id="lost-drawing">
+        <h3 class="reason-title">図面の紛失</h3>
+        <p>製作から年数が経ち、図面が紛失・散逸しているケースがあります。新栄テクニカでは現品から形状を読み取り、修理や作り替えを行います。</p>
+        <p class="reason-link">
+          → <a href="/mold/repair/">現品対応（図面なし）</a>
+        </p>
+      </article>
+
+      <article class="reason" id="overseas">
+        <h3 class="reason-title">海外調達型のトラブル</h3>
+        <p>海外で調達した金型に不具合が生じた場合、国内での修理対応が必要になることがあります。他社製・海外製を問わず対応いたします。</p>
+        <p class="reason-link">
+          → <a href="/mold/repair/">他社製・現品対応</a>
+        </p>
+      </article>
+
+      <article class="reason" id="retirement">
+        <h3 class="reason-title">ベテラン技術者の退職</h3>
+        <p>社内で金型を修理・調整してきた技術者が退職し、対応できる人がいなくなるケースが増えています。原因特定から改善、予防保全まで対応します。</p>
+        <p class="reason-link">
+          → <a href="/mold/diagnosis/">原因特定・改善</a> ／
+          <a href="/mold/maintenance/">予防保全</a>
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <CtaBlock heading="金型のお困りごと、まずはお聞かせください。" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .reason {
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid var(--c-line);
+    scroll-margin-top: 100px;
+  }
+  .reason:last-of-type {
+    border-bottom: none;
+  }
+  .reason-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+    color: var(--c-navy);
+  }
+  .reason p {
+    line-height: 1.9;
+    color: var(--c-ink);
+  }
+  .reason-link {
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .reason-link a {
+    color: var(--c-navy);
+    text-decoration: underline;
+  }
+</style>

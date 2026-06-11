@@ -1,0 +1,42 @@
+---
+interface Props {
+  troubles: string[];
+}
+const { troubles } = Astro.props;
+---
+<div class="service-troubles">
+  <h2 style="font-weight:700; margin-bottom:var(--space-3);">こんなお困りごとはありませんか？</h2>
+  <ul class="troubles-list">
+    {troubles.map((trouble) => (
+      <li>{trouble}</li>
+    ))}
+  </ul>
+</div>
+
+<style>
+  .service-troubles {
+    background: var(--c-bg-alt);
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+  }
+  .troubles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    list-style: none;
+    padding: 0;
+  }
+  .troubles-list li {
+    padding-left: 1.5rem;
+    position: relative;
+    color: var(--c-ink);
+  }
+  .troubles-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--c-navy);
+    font-weight: 700;
+  }
+</style>

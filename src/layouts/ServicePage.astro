@@ -1,0 +1,78 @@
+---
+// ラダーサービスページ共通レイアウト
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import LadderNav from "@components/LadderNav.astro";
+import FlowSteps from "@components/FlowSteps.astro";
+import CtaBlock from "@components/CtaBlock.astro";
+import { LADDER, CTA } from "@config/site.ts";
+
+interface Props {
+  title: string;
+  description: string;
+  ladderKey: string;
+  heroEn: string;
+  heroTitle: string;
+  heroLead: string;
+  nextLabel?: string;
+  nextHref?: string;
+}
+const {
+  title,
+  description,
+  ladderKey,
+  heroEn,
+  heroTitle,
+  heroLead,
+  nextLabel,
+  nextHref,
+} = Astro.props;
+
+const current = LADDER.find((s) => s.key === ladderKey);
+const currentIdx = current ? LADDER.indexOf(current) : -1;
+const next = nextHref
+  ? { title: nextLabel!, href: nextHref }
+  : currentIdx < LADDER.length - 1
+    ? { title: LADDER[currentIdx + 1].title, href: LADDER[currentIdx + 1].href }
+    : null;
+---
+<Base title={title} description={description}>
+  <section class="section">
+    <div class="container">
+      <p class="section-en">{heroEn}</p>
+      <h1 class="section-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">
+        {heroTitle}
+      </h1>
+      <p class="section-lead">{heroLead}</p>
+    </div>
+  </section>
+
+  <section class="section" style="margin-top: calc(var(--space-6) * -1.5);">
+    <div class="container container--narrow">
+      <slot />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading en="FLOW" title="ご相談から対応までの流れ" />
+      <FlowSteps />
+    </div>
+  </section>
+
+  <section class="section section--alt">
+    <div class="container">
+      <CtaBlock />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center; margin-bottom:var(--space-6);">
+        <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:var(--space-2); color:var(--c-navy);">関連サービス</h2>
+        <p style="color:var(--c-ink-soft);">課題に応じてこちらもご覧ください。</p>
+      </div>
+      <LadderNav currentKey={ladderKey} />
+    </div>
+  </section>
+</Base>

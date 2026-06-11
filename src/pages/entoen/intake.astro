@@ -1,0 +1,125 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import { COMPANY, SOCIAL, FORMS, CTA, ANALYTICS } from "@config/site.ts";
+---
+<Base
+  title="循環・製品化のご相談 — ENTOEN"
+  description="廃プラスチックの製品化・循環実装についてのご相談はこちらから。素材の種類や量、用途などをお聞かせください。"
+  tone="entoen"
+>
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHeading
+        en="CIRCULAR INTAKE"
+        title="循環・製品化のご相談"
+        lead="廃材の活用や製品化について、まずはお気軽にお聞かせください。内容を確認のうえ、実現可能性をご案内します。"
+      />
+
+      <form
+        name="entoen-intake"
+        method="POST"
+        data-netlify="true"
+        class="form"
+        action="/entoen/intake/thanks/"
+      >
+        {FORMS.honeypot && (
+          <p class="visually-hidden">
+            <label>{FORMS.honeypotFieldName}<input name={FORMS.honeypotFieldName} /></label>
+          </p>
+        )}
+        <input type="hidden" name="form-name" value="entoen-intake" />
+
+        <div class="form-group">
+          <label class="form-label" for="material">素材の種類 <span class="form-req">必須</span></label>
+          <input type="text" name="material" id="material" required class="form-input" placeholder="例：PP、PE、ABS など" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="volume">量の目安</label>
+          <input type="text" name="volume" id="volume" class="form-input" placeholder="例：月間 500kg 程度" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="usage">用途・目的</label>
+          <textarea name="usage" id="usage" rows="3" class="form-textarea" placeholder="例：自社の販促品にしたい、CSR活動に活用したい など"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="budget">予算感</label>
+          <select name="budget" id="budget" class="form-select">
+            <option value="">選択してください</option>
+            <option value="未定">まだ決まっていない</option>
+            <option value="~50万">〜50万円程度</option>
+            <option value="50~200万">50〜200万円程度</option>
+            <option value="200万~">200万円以上</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ent-timeline">実施時期</label>
+          <input type="text" name="timeline" id="ent-timeline" class="form-input" placeholder="例：今年度中、来年度、まずは検討段階" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="ent-referral">何を見てご相談いただきましたか？</label>
+          <select name="referral-source" id="ent-referral" class="form-select">
+            <option value="">選択してください</option>
+            <option value="Google検索">Google検索</option>
+            <option value="Googleマップ">Googleマップ</option>
+            <option value="Instagram">Instagram</option>
+            <option value="紹介">紹介</option>
+            <option value="展示会">展示会</option>
+            <option value="既存取引">既存取引</option>
+            <option value="その他">その他</option>
+          </select>
+          <p class="form-hint">今後のマーケティング改善の参考にさせていただきます。（任意）</p>
+        </div>
+
+        <hr style="border:none; border-top:1px solid var(--c-line); margin:var(--space-4) 0;" />
+
+        <div class="form-group">
+          <label class="form-label" for="ent-company">会社名・団体名</label>
+          <input type="text" name="company-name" id="ent-company" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ent-name">お名前 <span class="form-req">必須</span></label>
+          <input type="text" name="contact-name" id="ent-name" required class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ent-email">メールアドレス <span class="form-req">必須</span></label>
+          <input type="email" name="email" id="ent-email" required class="form-input" />
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="ent-phone">電話番号</label>
+          <input type="tel" name="phone" id="ent-phone" class="form-input" />
+        </div>
+
+        <p class="form-privacy">
+          <a href="/privacy/" target="_blank">プライバシーポリシー</a>をご確認のうえ、送信してください。
+        </p>
+
+        <button type="submit" class="btn btn--entoen btn--lg form-submit">
+          {CTA.entoenLabel}
+        </button>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .form { display: flex; flex-direction: column; gap: var(--space-3); }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-label { font-weight: 700; font-size: 0.95rem; }
+  .form-req { font-size: 0.75rem; color: #c44; margin-left: 0.3em; }
+  .form-input, .form-select, .form-textarea {
+    padding: 0.7rem 0.9rem; border: 1px solid var(--c-line); border-radius: var(--radius);
+    font: inherit; font-size: 1rem; width: 100%;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    outline: 2px solid var(--c-entoen); outline-offset: 1px; border-color: var(--c-entoen);
+  }
+  .form-privacy { font-size: 0.85rem; color: var(--c-ink-soft); }
+  .form-privacy a { text-decoration: underline; color: var(--c-entoen); }
+  .form-submit { align-self: center; width: 100%; max-width: 360px; justify-content: center; }
+</style>

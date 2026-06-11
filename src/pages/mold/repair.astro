@@ -1,0 +1,33 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="射出成形金型修理｜他社製・図面なし対応"
+  description="プラスチック射出成形金型の修理に対応。他社製金型、図面がない金型でも現品から修理いたします。バリ、破損、成形不良などの金型トラブルはご相談ください。"
+  ladderKey="repair"
+  heroEn="01 — REPAIR"
+  heroTitle="射出成形金型修理"
+  heroLead="他社製・図面なしの金型も、現品から修理いたします。"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.repair.troubles} />
+
+  <h2>バリ・破損・成形不良の金型修理</h2>
+  <p>
+    バリ、破損、変形などの金型トラブルによる成形不良に対し、適切な修理を行います。
+    他社製金型や海外製金型、また製作元が廃業した金型でも、現物確認から修理対応いたします。
+    図面がない場合でも現品から形状を読み取り、的確な修理方法をご提案します。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">射出成形金型の修理内容・方法</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>ピン交換</li>
+    <li>入れ子補修</li>
+    <li>摩耗部修理</li>
+    <li>破損部品製作</li>
+    <li>現品確認</li>
+    <li>必要に応じた部品手配</li>
+    <li>協力成形工場と連携した成形トライ・評価</li>
+  </ul>
+</ServicePage>

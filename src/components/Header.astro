@@ -1,0 +1,239 @@
+---
+import { COMPANY, NAV, CTA } from "@config/site.ts";
+interface Props {
+  tone?: "mold" | "entoen";
+}
+const { tone = "mold" } = Astro.props;
+const current = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === "/") return current === "/";
+  if (!current.startsWith(href)) return false;
+  // hrefの直後が '/' または 文字列終端であることを確認
+  const nextChar = current[href.length];
+  return nextChar === "/" || nextChar === undefined;
+};
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label={`${COMPANY.name} トップへ`}>
+      <img src="/images/logo-mark.png" alt={COMPANY.name} class="logo-img" />
+      <span class="logo-text">
+        <span class="logo-en" style="color: #16243d;">SHINEI TECNICA</span>
+        <span class="logo-jp">株式会社 新栄テクニカ</span>
+      </span>
+    </a>
+
+    <nav class="global-nav" aria-label="メインメニュー">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class:list={["nav-link", { "is-active": isActive(item.href), "is-entoen": item.href === "/entoen/" }]}
+                aria-current={isActive(item.href) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <a href={CTA.moldFormHref} class="btn btn--primary header-cta">
+      {tone === "entoen" ? "金型のご相談" : CTA.moldPrimaryLabel}
+    </a>
+
+    <button
+      class="nav-toggle"
+      id="navToggle"
+      aria-label="メニューを開く"
+      aria-expanded="false"
+      aria-controls="drawer"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  {/* モバイル用ドロワー */}
+  <div class="drawer" id="drawer" hidden>
+    <nav aria-label="モバイルメニュー">
+      <ul>
+        {
+          NAV.map((item) => (
+            <li>
+              <a href={item.href}>{item.label}</a>
+            </li>
+          ))
+        }
+        <li class="drawer-cta">
+          <a href={CTA.moldFormHref} class="btn btn--primary">
+            {CTA.moldPrimaryLabel}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: saturate(180%) blur(6px);
+    border-bottom: 1px solid var(--c-line);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: var(--header-h);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+  .logo:hover {
+    text-decoration: none;
+  }
+  .logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+  }
+  .logo-en {
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--c-navy);
+  }
+  .logo-jp {
+    font-size: 0.72rem;
+    color: var(--c-ink-soft);
+  }
+
+  .global-nav {
+    margin-left: auto;
+  }
+  .global-nav ul {
+    display: flex;
+    gap: 1.1rem;
+    flex-wrap: nowrap;
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0.4rem 0;
+    color: var(--c-ink);
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .nav-link:hover {
+    text-decoration: none;
+    color: var(--c-navy);
+  }
+  .nav-link.is-active {
+    color: var(--c-navy);
+    border-bottom-color: var(--c-navy);
+  }
+  .nav-link.is-entoen {
+    color: var(--c-entoen);
+  }
+  .nav-link.is-entoen:hover {
+    color: var(--c-entoen);
+  }
+  .nav-link.is-entoen.is-active {
+    border-bottom-color: var(--c-entoen);
+  }
+  .header-cta {
+    flex-shrink: 0;
+    min-height: 42px;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.9rem;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+  }
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 24px;
+    margin-inline: auto;
+    background: var(--c-navy);
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .drawer {
+    border-top: 1px solid var(--c-line);
+    background: #fff;
+  }
+  .drawer ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .drawer li a {
+    display: block;
+    padding: 1rem clamp(20px, 5vw, 40px);
+    border-bottom: 1px solid var(--c-line);
+    font-weight: 500;
+  }
+  .drawer-cta {
+    padding: 1rem clamp(20px, 5vw, 40px);
+  }
+  .drawer-cta .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* レスポンシブ：1024px以下でドロワー化 */
+  @media (max-width: 1024px) {
+    .global-nav,
+    .header-cta {
+      display: none;
+    }
+    .nav-toggle {
+      display: flex;
+      margin-left: auto;
+    }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("navToggle");
+  const drawer = document.getElementById("drawer");
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!open));
+    toggle.setAttribute("aria-label", open ? "メニューを開く" : "メニューを閉じる");
+    if (drawer) drawer.hidden = open;
+  });
+</script>

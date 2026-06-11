@@ -1,0 +1,13 @@
+---
+interface Props {
+  en?: string;
+  title: string;
+  lead?: string;
+}
+const { en, title, lead } = Astro.props;
+---
+<div class="section-head">
+  {en && <p class="section-en">{en}</p>}
+  <h2 class="section-title">{title}</h2>
+  {lead && <p class="section-lead">{lead}</p>}
+</div>

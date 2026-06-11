@@ -1,0 +1,342 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import { CTA } from "@config/site.ts";
+import { getCases } from "@lib/microcms.ts";
+
+const cases = await getCases();
+---
+
+<Base
+  title="ENTOEN｜廃プラスチックの製品化・循環実装"
+  description="ENTOENは、回収したプラスチックをオリジナル製品に製品化し、企業・学校・地域と連携した循環実装を支援。廃材活用、ノベルティ製作、ESG活動、CSR活動、企業連携など、製造技術による資源循環をご相談ください。"
+  tone="entoen"
+>
+  {/* ── ヒーロー ── */}
+  <section class="section" style="display: flex; align-items: center;">
+    <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6); align-items: center;">
+      <div>
+        <p class="section-en" style="color:var(--c-entoen);">CIRCULAR INNOVATION — ENTOEN</p>
+        <h1 class="section-title" style="font-size:clamp(1.5rem,4vw,2.2rem);">
+          廃材を、価値ある製品に。<br />循環を、実装する。
+        </h1>
+        <p class="section-lead">
+          企業・学校・地域と連携し、<br />
+          回収したプラスチックを製品化。<br />
+          回収で終わらない、循環の仕組みづくりを支援します。
+        </p>
+        <p style="margin-top:var(--space-4);">
+          <a href={CTA.entoenFormHref} class="btn btn--entoen btn--lg">循環・製品化について相談する</a>
+        </p>
+      </div>
+      <div>
+        <img src="/images/entoen-hero.jpg" width={560} height={400} alt="廃プラスチックの製品化" style="width: 100%; height: auto; border-radius: 12px; object-fit: cover;" />
+      </div>
+    </div>
+  </section>
+
+  {/* ── 活用事例 ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <h2 style="text-align:center; font-size:1.8rem; font-weight:700; margin-bottom:var(--space-2); color:var(--c-navy);">活用事例</h2>
+      <p style="text-align:center; color:var(--c-ink-soft); margin-bottom:var(--space-6); max-width:800px; margin-left:auto; margin-right:auto;">
+        企業・学校・地域と連携し、<br />
+        回収したプラスチックの製品化と循環実装に取り組んでいます。
+      </p>
+      <div class="grid grid--3">
+        {cases.slice(0, 3).map((caseItem) => (
+          <div class="case-card">
+            {caseItem.image && (
+              <div class="case-image">
+                <img src={caseItem.image.url} alt={caseItem.title} />
+              </div>
+            )}
+            <h3 style="font-weight:700; margin-bottom:0.4rem; font-size:0.95rem;">
+              {caseItem.title}
+            </h3>
+            <p style="font-size:0.8rem; color:var(--c-entoen); margin-bottom:0.6rem; font-weight:600;">
+              {caseItem.category}
+            </p>
+            <p style="font-size:0.85rem; color:var(--c-ink-soft); line-height:1.6;">
+              {caseItem.description}
+            </p>
+          </div>
+        ))}
+      </div>
+      <p style="margin-top:var(--space-3); text-align:center;">
+        <a href="/entoen/cases/" class="btn btn--outline">活動事例一覧を見る ▶</a>
+      </p>
+    </div>
+  </section>
+
+  {/* ── ENTOENの活動記録 ── */}
+  <section class="section">
+    <div class="container">
+      <h2 style="text-align:center; font-size:1.8rem; font-weight:700; margin-bottom:var(--space-2); color:var(--c-navy);">ENTOENの活動記録</h2>
+      <p style="margin-bottom:var(--space-4); text-align:center; color:var(--c-ink-soft);">
+        ENTOENの取り組みや製品化事例、回収活動の様子はInstagramで発信しています。
+      </p>
+
+      {/* LightWidget Instagram Feed */}
+      <div class="instagram-feed-container">
+        <script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script>
+        <iframe src="//lightwidget.com/widgets/74f51d59c6d659a591d64fdd9ef2385f.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+      </div>
+
+      {/* フォールバック：Instagramへのリンク */}
+      <div style="margin-top:var(--space-6); text-align:center;">
+        <a href="https://www.instagram.com/official_entoen/" target="_blank" rel="noopener" class="instagram-cta">
+          <span style="font-size:1.1rem;">📷</span>
+          Instagramアカウントを見る
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ── ENTOENでできること ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <h2 style="text-align:center; font-size:1.8rem; font-weight:700; margin-bottom:var(--space-1); color:var(--c-navy);">WHAT WE CAN DO</h2>
+      <p style="text-align:center; color:var(--c-ink-soft); margin-bottom:var(--space-6); max-width:900px; margin-left:auto; margin-right:auto;">
+        廃プラスチック製品化から循環実装まで。<br />
+        企業・学校・地域と連携し、製造技術を活用した循環の仕組みづくりを支援します。
+      </p>
+      <div class="grid grid--3">
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">プラスチック回収スキーム設計</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">企業・学校・地域との連携で廃プラスチック回収体制を構築</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">製品企画・設計</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">再生プラスチックの用途検討・オリジナル製品設計</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">試作・検証</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">3Dプリンタやペレット化による量産前検証</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">金型製作</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">再生プラスチック対応の量産化金型設計・製作</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">アップサイクル製品化</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">ノベルティ・教材・販促品・オフィス備品の製造</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:700; margin-bottom:0.6rem; color:var(--c-entoen);">循環実装・活用支援</h3>
+          <p style="font-size:0.9rem; color:var(--c-ink-soft);">製品の企業活動・地域活動・環境教育への組み込み</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── 循環実装の進め方 ── */}
+  <section class="section">
+    <div class="container">
+      <h2 style="text-align:center; font-size:1.8rem; font-weight:700; margin-bottom:var(--space-2); color:var(--c-navy);">循環実装の進め方</h2>
+      <p style="text-align:center; color:var(--c-ink-soft); margin-bottom:var(--space-6); max-width:700px; margin-left:auto; margin-right:auto;">
+        回収したプラスチックを、<br />活用される製品へつなげるまでを支援します。
+      </p>
+      <div class="process-flow-wrapper">
+        <div class="process-flow">
+          {[
+            { num: "1", label: "回収" },
+            { num: "2", label: "製品企画" },
+            { num: "3", label: "試作" },
+            { num: "4", label: "製品化" },
+            { num: "5", label: "活用" },
+            { num: "6", label: "循環実装" },
+          ].map((step, idx, arr) => (
+            <>
+              <div class="process-step">
+                <div class="process-num">{step.num}</div>
+                <div class="process-label">{step.label}</div>
+              </div>
+              {idx < arr.length - 1 && <div class="process-arrow">→</div>}
+            </>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── CTA ── */}
+  <section class="section section--alt">
+    <div class="container">
+      <div class="cta-block cta-block--entoen">
+        <div class="cta-block-text">
+          <h2 class="cta-block-heading">廃プラスチックを価値ある製品に変えませんか？</h2>
+          <p class="cta-block-micro">以下のようなご相談をお受けしています。</p>
+          <ul style="margin-top:var(--space-2); padding-left:1.5rem; list-style:disc;">
+            <li>廃プラスチックの活用方法を検討したい</li>
+            <li>オリジナル製品を作りたい</li>
+            <li>ESG・CSR活動を形にしたい</li>
+            <li>循環実装について相談したい</li>
+          </ul>
+        </div>
+        <div class="cta-block-actions">
+          <a href={CTA.entoenFormHref} class="btn btn--entoen btn--lg">
+            循環・製品化について相談する
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .grid {
+    display: grid;
+    gap: var(--space-3);
+  }
+  .grid--3 {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3);
+  }
+  .case-card {
+    background: #fff;
+    border: 1px solid var(--c-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+  }
+  .case-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .case-image {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .case-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .case-card > h3,
+  .case-card > p {
+    padding: 0 var(--space-3);
+  }
+  .case-card > h3:first-of-type {
+    padding-top: var(--space-3);
+  }
+  .case-card > :last-child {
+    padding-bottom: var(--space-3);
+  }
+  .instagram-feed-container {
+    margin: var(--space-6) 0;
+    min-height: 800px;
+  }
+  .instagram-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: var(--space-3) var(--space-6);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .instagram-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+    text-decoration: none;
+  }
+  .process-flow-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .process-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    min-width: min-content;
+    padding: var(--space-2) 0;
+  }
+  .process-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+  .process-num {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-entoen);
+    color: #fff;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  .process-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--c-navy);
+    text-align: center;
+    white-space: nowrap;
+  }
+  .process-arrow {
+    color: var(--c-entoen);
+    font-weight: 700;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  @media (max-width: 1024px) {
+    .process-flow {
+      gap: 0.8rem;
+    }
+    .process-num {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+    .process-label {
+      font-size: 0.85rem;
+    }
+  }
+  .cta-block {
+    background: rgba(47, 125, 118, 0.08);
+    border: 1px solid rgba(47, 125, 118, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    display: flex;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+  .cta-block-text {
+    flex: 1;
+  }
+  .cta-block-heading {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--c-navy);
+    margin-bottom: var(--space-2);
+  }
+  .cta-block-micro {
+    font-size: 0.9rem;
+    color: var(--c-ink-soft);
+  }
+  .cta-block-actions {
+    flex-shrink: 0;
+  }
+  @media (max-width: 768px) {
+    .cta-block {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+// モバイル固定バー：電話 / LINE を常時表示（スマホのみ）
+import { COMPANY, SOCIAL, CTA } from "@config/site.ts";
+import { ANALYTICS } from "@config/site.ts";
+---
+<div class="mobile-bar" aria-label="クイック連絡">
+  <a
+    href={COMPANY.telLink}
+    class="mb-item mb-tel"
+    data-ga-event={ANALYTICS.events.telTap}
+  >
+    <span class="mb-icon" aria-hidden="true">📞</span>
+    <span class="mb-label">電話</span>
+  </a>
+  {
+    SOCIAL.line && (
+      <a
+        href={SOCIAL.line}
+        class="mb-item mb-line"
+        target="_blank"
+        rel="noopener"
+        data-ga-event={ANALYTICS.events.lineTap}
+      >
+        <span class="mb-icon" aria-hidden="true">💬</span>
+        <span class="mb-label">LINE</span>
+      </a>
+    )
+  }
+  <a href={CTA.moldFormHref} class="mb-item mb-form">
+    <span class="mb-icon" aria-hidden="true">✉️</span>
+    <span class="mb-label">相談する</span>
+  </a>
+</div>
+
+<style>
+  .mobile-bar {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    background: #fff;
+    border-top: 1px solid var(--c-line);
+    box-shadow: 0 -2px 12px rgba(17, 32, 58, 0.08);
+  }
+  @media (max-width: 768px) {
+    .mobile-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+    }
+    /* 固定バーぶん本文末尾に余白 */
+    :global(body) {
+      padding-bottom: 64px;
+    }
+  }
+  .mb-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 60px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--c-ink);
+  }
+  .mb-item:hover {
+    text-decoration: none;
+  }
+  .mb-item + .mb-item {
+    border-left: 1px solid var(--c-line);
+  }
+  .mb-icon {
+    font-size: 1.2rem;
+  }
+  .mb-form {
+    background: var(--c-navy);
+    color: #fff;
+  }
+</style>
+
+<script>
+  // 電話 / LINE タップを GA4 イベント送信（gtagがある場合のみ）
+  document.querySelectorAll("[data-ga-event]").forEach((el) => {
+    el.addEventListener("click", () => {
+      const name = el.getAttribute("data-ga-event");
+      // @ts-ignore
+      if (name && typeof window.gtag === "function") window.gtag("event", name);
+    });
+  });
+</script>

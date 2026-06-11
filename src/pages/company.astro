@@ -1,0 +1,76 @@
+---
+import Base from "@layouts/Base.astro";
+import SectionHeading from "@components/SectionHeading.astro";
+import { COMPANY, SOCIAL } from "@config/site.ts";
+---
+<Base title="会社案内" description="株式会社新栄テクニカの会社概要・アクセスをご紹介します。">
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHeading en="COMPANY" title="会社案内" />
+
+      <table class="info-table">
+        <tbody>
+          <tr><th>会社名</th><td>{COMPANY.name}（{COMPANY.nameEn}）</td></tr>
+          <tr><th>所在地</th><td>{COMPANY.addressFull}</td></tr>
+          <tr><th>TEL</th><td><a href={COMPANY.telLink}>{COMPANY.tel}</a></td></tr>
+          <tr><th>FAX</th><td>{COMPANY.fax}</td></tr>
+          <tr><th>代表者</th><td>{COMPANY.representative}</td></tr>
+          <tr><th>設立</th><td>{COMPANY.established}</td></tr>
+          <tr><th>資本金</th><td>{COMPANY.capital}</td></tr>
+          <tr><th>事業内容</th><td>{COMPANY.businessSummary}</td></tr>
+          <tr><th>対応業界</th><td>{COMPANY.industries.join("、")}</td></tr>
+          <tr><th>営業時間</th><td>{COMPANY.businessHours}</td></tr>
+        </tbody>
+      </table>
+
+      {/* アクセス */}
+      <div style="margin-top:var(--space-6);">
+        <h3 style="font-weight:700; margin-bottom:var(--space-2);">アクセス</h3>
+        <div style="padding:var(--space-3); background:var(--c-bg-alt); border-radius:var(--radius-lg);">
+          <p style="margin:0 0 var(--space-2) 0;">〒{COMPANY.postalCode} {COMPANY.addressFull}</p>
+          <p style="margin:0;">
+            <a href="https://maps.app.goo.gl/aQ9rr8izjr49fJrGA" target="_blank" rel="noopener noreferrer" class="btn btn--outline" style="display:inline-block;">
+              Google Maps で開く ▶
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--space-4);
+  }
+  .info-table th,
+  .info-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--c-line);
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+  }
+  .info-table th {
+    width: 140px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--c-ink-soft);
+  }
+  @media (max-width: 500px) {
+    .info-table th,
+    .info-table td { display: block; padding: 0.4rem 0; }
+    .info-table th { border-bottom: none; padding-top: 0.8rem; }
+  }
+  .map-placeholder {
+    background: var(--c-bg-alt);
+    border: 1px dashed var(--c-line);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    text-align: center;
+    color: var(--c-ink-soft);
+  }
+</style>

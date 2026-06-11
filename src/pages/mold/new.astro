@@ -1,0 +1,35 @@
+---
+import ServicePage from "@layouts/ServicePage.astro";
+import ServiceTroubles from "@components/ServiceTroubles.astro";
+import { SERVICE_PAGES } from "@config/site.ts";
+---
+<ServicePage
+  title="プラスチック射出成形金型製作"
+  description="プラスチック射出成形金型の新規設計・製作に対応。ダイカスト金型も製作可能です。新製品開発から量産までサポートいたします。"
+  ladderKey="new"
+  heroEn="05 — NEW MOLD"
+  heroTitle="プラスチック射出成形金型製作"
+  heroLead="新製品の立ち上げから量産までサポートします。"
+  nextLabel="予防保全"
+  nextHref="/mold/maintenance/"
+>
+  <ServiceTroubles troubles={SERVICE_PAGES.new.troubles} />
+
+  <h2>新製品立ち上げのための新規金型製作</h2>
+  <p>
+    新しい製品の立ち上げや、既存金型からの切り替えに伴う射出成形金型を設計・製作します。
+    お客様の製品仕様、生産量、生産条件に合わせて、最適な新規金型を設計・製作いたします。
+    試作から量産対応まで、新規金型製作の全工程をサポートします。
+  </p>
+
+  <h3 style="margin-top:var(--space-4);">新規金型製作の流れ・サービス内容</h3>
+  <ul style="padding-left:1.2rem; list-style:disc; display:flex; flex-direction:column; gap:0.4rem; margin-top:0.6rem;">
+    <li>金型設計</li>
+    <li>金型製作</li>
+    <li>部品加工</li>
+    <li>組付け</li>
+    <li>仕上げ</li>
+    <li>協力成形工場と連携した成形トライ・評価</li>
+    <li>量産立ち上げ支援</li>
+  </ul>
+</ServicePage>
