@@ -5,8 +5,13 @@ import { getBlogs, getBlogDetail } from "@lib/microcms.ts";
 import { SITE } from "@config/site.ts";
 
 export async function getStaticPaths() {
-  const blogs = await getBlogs();
-  return blogs.map((b) => ({ params: { id: b.id } }));
+  try {
+    const blogs = await getBlogs();
+    return blogs.map((b) => ({ params: { id: b.id } }));
+  } catch (err) {
+    console.warn('blogs fetch failed:', err);
+    return [];
+  }
 }
 
 const { id } = Astro.params;
