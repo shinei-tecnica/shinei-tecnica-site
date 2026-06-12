@@ -232,6 +232,8 @@ button {
   min-height: 56px;
   font-size: 1.05rem;
   padding: 0.9rem 2rem;
+  width: auto;
+  white-space: nowrap;
 }
 
 /* ---- カード ---- */

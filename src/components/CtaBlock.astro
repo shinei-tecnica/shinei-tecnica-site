@@ -86,11 +86,21 @@ const btnClass = isMold ? "btn--primary" : "btn--entoen";
     flex-direction: column;
     gap: var(--space-2);
     flex-shrink: 0;
+    align-items: flex-start;
   }
   .cta-block-sub {
     display: flex;
     gap: var(--space-2);
     flex-wrap: wrap;
+  }
+  @media (max-width: 600px) {
+    .cta-block-sub {
+      flex-direction: column;
+      width: 100%;
+    }
+    .cta-block-sub .btn {
+      width: 100%;
+    }
   }
   .cta-tel {
     display: flex;
