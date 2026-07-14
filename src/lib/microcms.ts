@@ -27,6 +27,7 @@ export interface WorkEntry {
   solution: string;
   point: string;
   metaDescription: string;
+  publishedAt: string;
 }
 
 export interface VoiceEntry {
@@ -129,6 +130,7 @@ const DUMMY_WORKS: WorkEntry[] = [
     solution: "PL面の摩耗箇所を肉盛り修正し、型合わせ精度を回復。バリの再発を解消。",
     point: "現品確認により、目視では分かりにくい微細摩耗を特定できた。",
     metaDescription: "自動車部品用の他社製金型でバリ不良が発生。原因特定からPL面修正まで対応した事例です。",
+    publishedAt: "2026-06-15T10:00:00.000Z",
   },
   {
     id: "work-design-change",
@@ -140,6 +142,7 @@ const DUMMY_WORKS: WorkEntry[] = [
     solution: "入子交換とスライド機構の改修で、既存金型を活かしたまま仕様変更に対応。",
     point: "型の作り替えではなく設変で対応することで、コストと納期を圧縮。",
     metaDescription: "OA機器部品の仕様変更に伴う金型の設計変更（設変）事例です。",
+    publishedAt: "2026-05-20T14:30:00.000Z",
   },
   {
     id: "work-remake",
@@ -151,6 +154,7 @@ const DUMMY_WORKS: WorkEntry[] = [
     solution: "現品から形状データを取得し、新しい金型として作り替え。成形条件も最適化。",
     point: "図面が残っていなかったが、現品対応で作り替えを実現。",
     metaDescription: "図面なしの老朽化金型を現品から作り替えた事例です。",
+    publishedAt: "2026-04-10T09:15:00.000Z",
   },
 ];
 
