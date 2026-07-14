@@ -27,7 +27,7 @@ if (!work) return Astro.redirect("/works/");
     <div class="container container--narrow">
       <div class="work-meta">
         <p class="section-en">{Array.isArray(work.category) ? work.category[0] : work.category}　|　{Array.isArray(work.industry) ? work.industry[0] : work.industry}</p>
-        {work.publishedAt && <p class="work-published">{new Date(work.publishedAt).toLocaleDateString('ja-JP')}</p>}
+        {work.publishedAt && <p class="work-published">{new Date(work.publishedAt).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>}
       </div>
       <h1 class="section-title">{work.title}</h1>
 

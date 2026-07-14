@@ -27,7 +27,7 @@ const articles = allBlogs.filter(post =>
             <span class="work-cat">{Array.isArray(w.category) ? w.category[0] : w.category}</span>
             <h3 class="work-title">{w.title}</h3>
             <p class="text-soft" style="font-size:0.88rem;">{Array.isArray(w.industry) ? w.industry[0] : w.industry}</p>
-            {w.publishedAt && <p class="work-date">{new Date(w.publishedAt).toLocaleDateString('ja-JP')}</p>}
+            {w.publishedAt && <p class="work-date">{new Date(w.publishedAt).toLocaleDateString('ja-JP', { year: 'numeric', month: '2-digit', day: '2-digit' })}</p>}
           </a>
         ))}
       </div>

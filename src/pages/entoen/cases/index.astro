@@ -46,8 +46,8 @@ try {
                 <time datetime={caseItem.publishedDate} style="font-size:0.75rem; color:var(--c-ink-soft); display:block; margin-top:0.8rem;">
                   {new Date(caseItem.publishedDate).toLocaleDateString("ja-JP", {
                     year: "numeric",
-                    month: "short",
-                    day: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
                   })}
                 </time>
               </div>
