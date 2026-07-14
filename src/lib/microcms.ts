@@ -20,9 +20,9 @@ export interface BlogEntry {
 export interface WorkEntry {
   id: string;
   title: string;
-  category: string;
-  industry: string;
-  images?: { url: string; width: number; height: number }[];
+  category: string[];
+  industry: string[];
+  images?: { url: string; width: number; height: number };
   problem: string;
   solution: string;
   point: string;
@@ -122,9 +122,9 @@ const DUMMY_WORKS: WorkEntry[] = [
   {
     id: "work-repair-bari",
     title: "バリ不良の原因特定と金型修理",
-    category: "金型修理",
-    industry: "自動車",
-    images: [{ url: "/images/placeholder-work.svg", width: 600, height: 400 }],
+    category: ["金型修理"],
+    industry: ["自動車"],
+    images: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
     problem: "他社製金型でバリが繰り返し発生し、成形品の品質が安定しなかった。",
     solution: "PL面の摩耗箇所を肉盛り修正し、型合わせ精度を回復。バリの再発を解消。",
     point: "現品確認により、目視では分かりにくい微細摩耗を特定できた。",
@@ -133,9 +133,9 @@ const DUMMY_WORKS: WorkEntry[] = [
   {
     id: "work-design-change",
     title: "OA機器部品の設計変更（設変）",
-    category: "設変",
-    industry: "OA機器",
-    images: [{ url: "/images/placeholder-work.svg", width: 600, height: 400 }],
+    category: ["設変"],
+    industry: ["OA機器"],
+    images: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
     problem: "製品仕様の変更に伴い、金型の一部形状を変更する必要があった。",
     solution: "入子交換とスライド機構の改修で、既存金型を活かしたまま仕様変更に対応。",
     point: "型の作り替えではなく設変で対応することで、コストと納期を圧縮。",
@@ -144,9 +144,9 @@ const DUMMY_WORKS: WorkEntry[] = [
   {
     id: "work-remake",
     title: "老朽化金型の作り替え",
-    category: "型の作り替え",
-    industry: "家電",
-    images: [{ url: "/images/placeholder-work.svg", width: 600, height: 400 }],
+    category: ["型の作り替え"],
+    industry: ["家電"],
+    images: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
     problem: "20年以上使用した金型が寿命を迎え、修理では品質維持が困難に。",
     solution: "現品から形状データを取得し、新しい金型として作り替え。成形条件も最適化。",
     point: "図面が残っていなかったが、現品対応で作り替えを実現。",

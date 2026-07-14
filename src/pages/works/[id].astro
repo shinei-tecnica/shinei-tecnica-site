@@ -25,23 +25,20 @@ if (!work) return Astro.redirect("/works/");
 <Base title={work.title} description={work.metaDescription}>
   <section class="section">
     <div class="container container--narrow">
-      <p class="section-en">{work.category}　|　{work.industry}</p>
+      <p class="section-en">{Array.isArray(work.category) ? work.category[0] : work.category}　|　{Array.isArray(work.industry) ? work.industry[0] : work.industry}</p>
       <h1 class="section-title">{work.title}</h1>
 
-      {/* 写真ギャラリー */}
-      {work.images && work.images.length > 0 && (
+      {work.images && (
         <div class="wd-gallery">
-          {work.images.map((img, i) => (
-            <figure class="wd-photo">
-              <img
-                src={img.url}
-                width={img.width}
-                height={img.height}
-                alt={`${work.title} 写真${i + 1}`}
-                loading={i === 0 ? "eager" : "lazy"}
-              />
-            </figure>
-          ))}
+          <figure class="wd-photo">
+            <img
+              src={work.images.url}
+              width={work.images.width}
+              height={work.images.height}
+              alt={work.title}
+              loading="eager"
+            />
+          </figure>
         </div>
       )}
 

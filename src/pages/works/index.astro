@@ -19,14 +19,14 @@ const articles = allBlogs.filter(post =>
       <div class="grid grid--3">
         {works.map((w) => (
           <a href={`/works/${w.id}/`} class="work-card card">
-            {w.images && w.images.length > 0 && (
+            {w.images && (
               <div class="work-thumb">
-                <img src={w.images[0].url} width={w.images[0].width} height={w.images[0].height} alt={w.title} loading="lazy" />
+                <img src={w.images.url} width={w.images.width} height={w.images.height} alt={w.title} loading="lazy" />
               </div>
             )}
-            <span class="work-cat">{w.category}</span>
+            <span class="work-cat">{Array.isArray(w.category) ? w.category[0] : w.category}</span>
             <h3 class="work-title">{w.title}</h3>
-            <p class="text-soft" style="font-size:0.88rem;">{w.industry}</p>
+            <p class="text-soft" style="font-size:0.88rem;">{Array.isArray(w.industry) ? w.industry[0] : w.industry}</p>
           </a>
         ))}
       </div>
