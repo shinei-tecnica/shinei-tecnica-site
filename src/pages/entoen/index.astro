@@ -50,22 +50,24 @@ try {
       </p>
       <div class="grid grid--3">
         {cases.slice(0, 3).map((caseItem) => (
-          <div class="case-card">
-            {caseItem.image && (
-              <div class="case-image">
-                <img src={caseItem.image.url} alt={caseItem.title} />
-              </div>
-            )}
-            <h3 style="font-weight:700; margin-bottom:0.4rem; font-size:0.95rem;">
-              {caseItem.title}
-            </h3>
-            <p style="font-size:0.8rem; color:var(--c-entoen); margin-bottom:0.6rem; font-weight:600;">
-              {caseItem.category}
-            </p>
-            <p style="font-size:0.85rem; color:var(--c-ink-soft); line-height:1.6;">
-              {caseItem.description}
-            </p>
-          </div>
+          <a href={`/entoen/cases/${caseItem.id}/`} class="case-card-link">
+            <div class="case-card">
+              {caseItem.image && (
+                <div class="case-image">
+                  <img src={caseItem.image.url} alt={caseItem.title} />
+                </div>
+              )}
+              <h3 style="font-weight:700; margin-bottom:0.4rem; font-size:0.95rem;">
+                {caseItem.title}
+              </h3>
+              <p style="font-size:0.8rem; color:var(--c-entoen); margin-bottom:0.6rem; font-weight:600;">
+                {caseItem.category}
+              </p>
+              <p style="font-size:0.85rem; color:var(--c-ink-soft); line-height:1.6;">
+                {caseItem.summary}
+              </p>
+            </div>
+          </a>
         ))}
       </div>
       <p style="margin-top:var(--space-3); text-align:center;">
@@ -195,6 +197,11 @@ try {
     border-radius: var(--radius-lg);
     padding: var(--space-3);
   }
+  .case-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
   .case-card {
     background: #fff;
     border: 1px solid var(--c-line);
@@ -203,10 +210,11 @@ try {
     transition: transform 0.2s, box-shadow 0.2s;
     display: flex;
     flex-direction: column;
+    height: 100%;
   }
-  .case-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .case-card-link:hover .case-card {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(47, 125, 118, 0.15);
   }
   .case-image {
     width: 100%;
