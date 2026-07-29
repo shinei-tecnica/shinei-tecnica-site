@@ -47,15 +47,15 @@ if (!work) return Astro.redirect("/works/");
 
       <div class="wd-block">
         <h2 class="wd-label">課題</h2>
-        <p>{work.problem}</p>
+        <p class="wd-text">{work.problem}</p>
       </div>
       <div class="wd-block">
         <h2 class="wd-label">対応</h2>
-        <p>{work.solution}</p>
+        <p class="wd-text">{work.solution}</p>
       </div>
       <div class="wd-block">
         <h2 class="wd-label">ポイント</h2>
-        <p>{work.point}</p>
+        <p class="wd-text">{work.point}</p>
       </div>
 
       <p style="margin-top:var(--space-4);">
@@ -92,4 +92,5 @@ if (!work) return Astro.redirect("/works/");
   .wd-block p { line-height: 1.9; }
   .work-meta { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 0.8rem; }
   .work-published { font-size: 0.9rem; color: var(--c-ink-soft); margin: 0; }
+  .wd-text { white-space: pre-line; }
 </style>
