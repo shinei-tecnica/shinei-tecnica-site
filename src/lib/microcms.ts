@@ -42,6 +42,7 @@ export interface CaseEntry {
   id: string;
   title: string;
   category: string;
+  summary: string;
   description: string;
   image?: { url: string; width: number; height: number };
   publishedDate: string;
@@ -189,6 +190,7 @@ const DUMMY_CASES: CaseEntry[] = [
     id: "case-plastic-product",
     title: "廃プラスチックから新しい製品へ",
     category: "廃プラスチック製品化",
+    summary: "企業で回収したプラスチックを製品化し、ノベルティとして活用。",
     description:
       "企業で回収したプラスチックを製品化し、ノベルティとして活用。廃材の有効活用とESG活動を同時に実現した事例です。",
     image: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
@@ -198,6 +200,7 @@ const DUMMY_CASES: CaseEntry[] = [
     id: "case-school-program",
     title: "学校との連携による回収プログラム",
     category: "学校連携",
+    summary: "地域の学校と連携し、プラスチックを教材へ製品化。",
     description:
       "地域の学校と連携し、回収したプラスチックを教材へ製品化。環境教育と循環実装を組み合わせた取り組みです。",
     image: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
@@ -207,6 +210,7 @@ const DUMMY_CASES: CaseEntry[] = [
     id: "case-company-collaboration",
     title: "企業連携による循環型事業の構築",
     category: "企業連携",
+    summary: "複数企業と連携し、循環サイクルを構築。",
     description:
       "複数企業と連携し、廃プラスチックを回収・製品化・活用するサイクルを構築。ビジネスと環境配慮を両立させた事例です。",
     image: { url: "/images/placeholder-work.svg", width: 600, height: 400 },
