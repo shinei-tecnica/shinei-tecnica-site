@@ -116,36 +116,36 @@ const jsonLd = [
         title="プラスチック射出成形金型の修理・設計変更から新規金型製作まで"
       />
       <div class="services-grid">
-        <div class="service-card">
+        <a href="/mold/repair/" class="service-card">
           <div class="service-num">01</div>
           <h3>修理</h3>
           <p>バリや破損などの金型トラブルを修復。他社製金型や図面なし金型もご相談ください。</p>
-          <a href="/mold/repair/">詳しく見る ▶</a>
-        </div>
-        <div class="service-card">
+          <span class="service-link">詳しく見る ▶</span>
+        </a>
+        <a href="/mold/design-change/" class="service-card">
           <div class="service-num">02</div>
           <h3>設計変更（設変）</h3>
           <p>製品仕様変更時の金型設変に対応。既存金型の改修で工期短縮・コスト削減を実現。</p>
-          <a href="/mold/design-change/">詳しく見る ▶</a>
-        </div>
-        <div class="service-card">
+          <span class="service-link">詳しく見る ▶</span>
+        </a>
+        <a href="/mold/third-party/" class="service-card">
           <div class="service-num">03</div>
           <h3>他社製・図面なし対応</h3>
           <p>海外製や図面が残っていない金型も現品から修理・設変に対応。名古屋から全国対応。</p>
-          <a href="/mold/third-party/">詳しく見る ▶</a>
-        </div>
-        <div class="service-card">
+          <span class="service-link">詳しく見る ▶</span>
+        </a>
+        <a href="/mold/remake/" class="service-card">
           <div class="service-num">04</div>
           <h3>型更新・作り替え</h3>
           <p>老朽化した金型を新しく作り替え。修理では対応困難な金型の寿命判断もサポート。</p>
-          <a href="/mold/remake/">詳しく見る ▶</a>
-        </div>
-        <div class="service-card">
+          <span class="service-link">詳しく見る ▶</span>
+        </a>
+        <a href="/mold/new/" class="service-card">
           <div class="service-num">05</div>
           <h3>新規金型製作</h3>
           <p>プラスチック射出成形金型の新規設計・製作。試作から量産対応まで一貫対応。</p>
-          <a href="/mold/new/">詳しく見る ▶</a>
-        </div>
+          <span class="service-link">詳しく見る ▶</span>
+        </a>
       </div>
     </div>
   </section>
@@ -418,6 +418,8 @@ const jsonLd = [
     border-radius: var(--radius-lg);
     padding: var(--space-4);
     text-align: center;
+    text-decoration: none;
+    color: inherit;
     transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
   }
   .service-card:hover {
@@ -446,14 +448,9 @@ const jsonLd = [
     flex-grow: 1;
     margin-bottom: var(--space-2);
   }
-  .service-card a {
+  .service-link {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--c-navy);
-    transition: color 0.2s;
-  }
-  .service-card a:hover {
-    color: var(--c-navy-700);
-    text-decoration: none;
   }
 </style>
